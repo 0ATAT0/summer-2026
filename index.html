@@ -2,592 +2,956 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montenegro & Croatia — Summer 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Summer 2026 — Montenegro &amp; Croatia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ink: #1a1a2e;
-            --paper: #faf9f6;
-            --accent: #2d6a9f;
-            --accent-light: #e8f0f8;
-            --warm: #c4956a;
-            --warm-light: #fdf3eb;
-            --red: #b44;
-            --red-light: #fceaea;
-            --green: #3a7d5c;
-            --green-light: #eaf5ef;
-            --border: #e0ddd8;
-            --muted: #6b6b6b;
-            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+            --bg: oklch(97.5% 0.008 70);
+            --bg-warm: oklch(95% 0.015 65);
+            --bg-surface: oklch(99% 0.005 70);
+            --ink: oklch(18% 0.02 260);
+            --ink-secondary: oklch(42% 0.02 260);
+            --ink-muted: oklch(55% 0.015 260);
+            --border: oklch(88% 0.01 70);
+            --border-light: oklch(92% 0.008 70);
+
+            --terracotta: oklch(58% 0.14 45);
+            --terracotta-light: oklch(92% 0.04 45);
+            --sea: oklch(48% 0.1 230);
+            --sea-light: oklch(93% 0.03 230);
+            --olive: oklch(50% 0.1 150);
+            --olive-light: oklch(93% 0.04 150);
+            --sand: oklch(62% 0.12 70);
+            --sand-light: oklch(94% 0.03 70);
+            --coral: oklch(52% 0.14 25);
+            --coral-light: oklch(93% 0.04 25);
+
+            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 96px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: var(--font-body);
             color: var(--ink);
-            background: var(--paper);
-            line-height: 1.7;
+            background: var(--bg);
+            line-height: 1.65;
+            font-size: 1rem;
+            font-weight: 400;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* ── SCROLL PROGRESS ── */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--terracotta);
+            width: 0%;
+            z-index: 100;
+            transition: none;
+        }
+
+        /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #4a9ebb 100%);
-            color: white;
-            padding: 4rem 2rem 3rem;
-            text-align: center;
+            background:
+                linear-gradient(165deg,
+                    oklch(22% 0.04 250) 0%,
+                    oklch(28% 0.06 240) 25%,
+                    oklch(38% 0.08 220) 50%,
+                    oklch(48% 0.1 180) 70%,
+                    oklch(60% 0.1 80) 90%,
+                    oklch(72% 0.12 60) 100%
+                );
+            color: oklch(97% 0.01 70);
+            padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(2.5rem, 6vw, 5rem);
             position: relative;
             overflow: hidden;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .hero::after {
+
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: var(--paper);
-            clip-path: ellipse(55% 100% at 50% 100%);
-        }
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            margin-bottom: 0.5rem;
-        }
-        .hero .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            font-style: italic;
-        }
-        .hero .meta {
-            margin-top: 1.5rem;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .hero .meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 40%, oklch(65% 0.1 60 / 0.15), transparent),
+                radial-gradient(ellipse 50% 80% at 20% 80%, oklch(45% 0.1 230 / 0.2), transparent);
+            pointer-events: none;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
+        .hero-inner {
+            max-width: 720px;
+            position: relative;
+            z-index: 1;
         }
 
-        .nav-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0 3rem;
-        }
-        .nav-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: var(--ink);
-            transition: all 0.2s;
-            box-shadow: var(--shadow);
-        }
-        .nav-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        .nav-card .rank {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1;
-        }
-        .nav-card h3 {
-            margin: 0.5rem 0 0.3rem;
-            font-size: 1.1rem;
-        }
-        .nav-card .country {
+        .hero-kicker {
+            font-family: var(--font-body);
             font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--muted);
-        }
-        .nav-card p {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-top: 0.5rem;
+            opacity: 0.7;
+            margin-bottom: var(--space-md);
         }
 
-        h2 {
-            font-size: 1.8rem;
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 6vw, 4rem);
             font-weight: 400;
-            margin: 3rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-        h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 2rem 0 0.8rem;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-lg);
         }
 
-        .verdict-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-        }
-        .verdict-table th {
-            text-align: left;
-            padding: 0.8rem 1rem;
-            background: var(--accent-light);
-            border-bottom: 2px solid var(--accent);
-            font-weight: 600;
-        }
-        .verdict-table td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-        }
-        .verdict-table tr:hover {
-            background: #fafafa;
+        .hero h1 em {
+            font-style: italic;
+            color: oklch(85% 0.1 60);
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.15rem 0.6rem;
-            border-radius: 20px;
+        .hero-body {
+            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            line-height: 1.7;
+            opacity: 0.85;
+            max-width: 560px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+
+        .hero-tag {
             font-size: 0.78rem;
-            font-weight: 600;
-            font-family: system-ui, sans-serif;
-            white-space: nowrap;
+            font-weight: 500;
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            background: oklch(100% 0 0 / 0.12);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid oklch(100% 0 0 / 0.15);
+            letter-spacing: 0.02em;
         }
-        .badge-yes { background: var(--green-light); color: var(--green); }
-        .badge-no { background: var(--red-light); color: var(--red); }
-        .badge-maybe { background: var(--warm-light); color: #8a6030; }
-        .badge-star { background: #fef3c7; color: #92400e; }
 
-        .rec-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: var(--shadow);
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 4vw, 2rem);
         }
-        .rec-section.top-pick {
-            border-color: var(--accent);
-            border-width: 2px;
+
+        /* ── SECTION SPACING ── */
+        .section {
+            padding: var(--space-3xl) 0;
         }
-        .rec-header {
+
+        .section + .section {
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* ── TYPOGRAPHY ── */
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-md);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--ink-secondary);
+            max-width: 65ch;
+            margin-bottom: var(--space-xl);
+        }
+
+        .label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+
+        /* ── TOP PICKS NAV ── */
+        .picks {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        @media (min-width: 640px) {
+            .picks { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
+        .pick-link {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .rec-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1;
-            min-width: 2.5rem;
-        }
-        .rec-title h3 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-        .rec-title .country-tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--muted);
-        }
-
-        .score-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 0.8rem;
-            margin: 1.5rem 0;
-        }
-        .score-item {
-            text-align: center;
-            padding: 0.8rem;
-            border-radius: 8px;
-            background: var(--paper);
-        }
-        .score-item .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--muted);
-            font-family: system-ui, sans-serif;
-        }
-        .score-item .dots {
-            font-size: 1.1rem;
-            margin: 0.3rem 0;
-            letter-spacing: 0.15em;
-        }
-        .dot-full { color: var(--accent); }
-        .dot-empty { color: #ddd; }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        @media (max-width: 600px) {
-            .detail-grid { grid-template-columns: 1fr; }
-        }
-        .detail-item {
-            padding: 1rem;
-            background: var(--paper);
-            border-radius: 6px;
-        }
-        .detail-item h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--muted);
-            margin-bottom: 0.5rem;
-            font-family: system-ui, sans-serif;
-        }
-        .detail-item p, .detail-item ul {
-            font-size: 0.92rem;
-        }
-        .detail-item ul {
-            padding-left: 1.2rem;
-        }
-        .detail-item li {
-            margin-bottom: 0.3rem;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
-        .comparison-table th {
-            text-align: left;
-            padding: 0.7rem 0.8rem;
-            background: var(--paper);
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--muted);
-            font-family: system-ui, sans-serif;
-        }
-        .comparison-table td {
-            padding: 0.7rem 0.8rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .comparison-table tr:last-child td { border-bottom: none; }
-
-        .callout {
-            padding: 1.2rem 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-        }
-        .callout-info {
-            background: var(--accent-light);
-            border-left: 4px solid var(--accent);
-        }
-        .callout-warn {
-            background: var(--warm-light);
-            border-left: 4px solid var(--warm);
-        }
-        .callout-good {
-            background: var(--green-light);
-            border-left: 4px solid var(--green);
-        }
-
-        .practical-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .practical-item {
-            background: white;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--ink);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.2rem;
-        }
-        .practical-item h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-        .practical-item p {
-            font-size: 0.88rem;
-            color: var(--muted);
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
         }
 
-        .deep-dive {
-            margin-top: 1rem;
+        .pick-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px oklch(0% 0 0 / 0.08);
+            border-color: var(--terracotta);
         }
-        .deep-dive summary {
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--accent);
-            padding: 0.5rem 0;
-            font-size: 0.95rem;
+
+        .pick-link:active {
+            transform: translateY(-1px);
         }
-        .deep-dive summary:hover {
-            text-decoration: underline;
+
+        .pick-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--terracotta);
+            flex-shrink: 0;
         }
-        .deep-dive-content {
-            padding: 1rem 0;
+
+        .pick-info { flex: 1; min-width: 0; }
+
+        .pick-info .label {
+            color: var(--terracotta);
+            margin-bottom: 2px;
         }
-        .deep-dive-content h4 {
-            font-size: 1rem;
-            margin: 1.5rem 0 0.5rem;
+
+        .pick-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .pick-info p {
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+            line-height: 1.5;
+        }
+
+        /* ── VERDICT GRID ── */
+        .verdict-group-label {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            margin-bottom: var(--space-md);
+            margin-top: var(--space-xl);
             color: var(--ink);
         }
-        .deep-dive-content h4:first-child {
-            margin-top: 0;
-        }
-        .deep-dive-content ul {
-            padding-left: 1.5rem;
-            margin: 0.5rem 0;
-        }
-        .deep-dive-content li {
-            margin-bottom: 0.4rem;
-            font-size: 0.92rem;
-        }
-        .deep-dive-content p {
-            font-size: 0.92rem;
-            margin: 0.5rem 0;
-        }
-        .deep-dive-content .restaurant-card,
-        .deep-dive-content .beach-card,
-        .deep-dive-content .villa-card {
-            background: var(--paper);
-            border-radius: 6px;
-            padding: 0.8rem 1rem;
-            margin: 0.5rem 0;
-        }
-        .deep-dive-content .restaurant-card strong,
-        .deep-dive-content .beach-card strong,
-        .deep-dive-content .villa-card strong {
-            color: var(--accent);
-        }
 
-        .itinerary {
-            margin: 1rem 0;
-        }
-        .itinerary-day {
+        .verdict-group-label:first-of-type { margin-top: 0; }
+
+        .verdicts {
             display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 1rem;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .itinerary-day:last-child { border-bottom: none; }
-        .day-label {
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-family: system-ui, sans-serif;
-            padding-top: 0.1rem;
-        }
-        .day-content {
-            font-size: 0.92rem;
-        }
-        .day-content strong { font-weight: 600; }
-
-        footer {
-            text-align: center;
-            padding: 3rem 1.5rem;
-            color: var(--muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 3rem;
+            gap: var(--space-sm);
         }
 
-        .stars { color: #d4a017; letter-spacing: 0.1em; }
+        .verdict-row {
+            display: grid;
+            grid-template-columns: 120px auto 1fr;
+            gap: var(--space-md);
+            align-items: baseline;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
 
         @media (max-width: 600px) {
-            .hero { padding: 3rem 1.5rem 2.5rem; }
-            .container { padding: 1.5rem 1rem; }
-            .rec-section { padding: 1.5rem; }
-            .hero .meta { gap: 1rem; }
+            .verdict-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+                padding: var(--space-md) 0;
+            }
+        }
+
+        .verdict-row:last-child { border-bottom: none; }
+
+        .verdict-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .verdict-why {
+            font-size: 0.88rem;
+            color: var(--ink-secondary);
+            line-height: 1.55;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .tag-go { background: var(--olive-light); color: var(--olive); }
+        .tag-skip { background: var(--coral-light); color: var(--coral); }
+        .tag-visit { background: var(--sand-light); color: oklch(45% 0.1 70); }
+        .tag-star { background: oklch(92% 0.05 60); color: oklch(42% 0.12 50); }
+
+        /* ── RECOMMENDATION SECTION ── */
+        .rec {
+            padding: var(--space-3xl) 0;
+        }
+
+        .rec + .rec {
+            border-top: 1px solid var(--border-light);
+        }
+
+        .rec-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .rec-rank {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            line-height: 1;
+            color: var(--terracotta);
+            opacity: 0.3;
+        }
+
+        .rec-meta {
+            flex: 1;
+        }
+
+        .rec-meta .label {
+            color: var(--terracotta);
+        }
+
+        .rec h2 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .rec-intro {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--ink-secondary);
+            max-width: 65ch;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ── SCORE BAR ── */
+        .scores {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        @media (max-width: 500px) {
+            .scores {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .score {
+            text-align: center;
+        }
+
+        .score .label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.68rem;
+        }
+
+        .score-bar {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .score-pip {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--border);
+            transition: background 0.4s var(--ease-out);
+        }
+
+        .score-pip.filled {
+            background: var(--terracotta);
+        }
+
+        /* ── INFO GRID ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-box {
+            padding: var(--space-lg);
+            background: var(--bg-warm);
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .info-box ul {
+            list-style: none;
+        }
+
+        .info-box li {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            padding: 3px 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.65em;
+            width: 4px;
+            height: 4px;
+            border-radius: 1px;
+            background: var(--terracotta);
+            opacity: 0.5;
+        }
+
+        /* ── CALLOUT ── */
+        .callout {
+            padding: var(--space-lg);
+            border-radius: 8px;
+            margin: var(--space-xl) 0;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .callout strong { font-weight: 600; }
+
+        .callout-sea {
+            background: var(--sea-light);
+            border-left: 3px solid var(--sea);
+        }
+
+        .callout-warm {
+            background: var(--sand-light);
+            border-left: 3px solid var(--sand);
+        }
+
+        .callout-olive {
+            background: var(--olive-light);
+            border-left: 3px solid var(--olive);
+        }
+
+        .callout-coral {
+            background: var(--coral-light);
+            border-left: 3px solid var(--coral);
+        }
+
+        /* ── DETAILS / ACCORDION ── */
+        details.dive {
+            margin-top: var(--space-lg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-surface);
+        }
+
+        details.dive summary {
+            padding: var(--space-lg) var(--space-xl);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+            transition: background 0.2s;
+            list-style: none;
+        }
+
+        details.dive summary::-webkit-details-marker { display: none; }
+
+        details.dive summary::after {
+            content: '+';
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            transition: transform 0.35s var(--ease-out);
+            flex-shrink: 0;
+        }
+
+        details.dive[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        details.dive summary:hover {
+            background: var(--bg-warm);
+        }
+
+        details.dive[open] summary {
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .dive-body {
+            padding: var(--space-xl);
+        }
+
+        .dive-body h4 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin: var(--space-xl) 0 var(--space-md);
+        }
+
+        .dive-body h4:first-child { margin-top: 0; }
+
+        .dive-body p {
+            font-size: 0.9rem;
+            margin: var(--space-sm) 0;
+            color: var(--ink-secondary);
+            line-height: 1.65;
+        }
+
+        .dive-body ul {
+            padding-left: 1.25rem;
+            margin: var(--space-sm) 0;
+        }
+
+        .dive-body li {
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+            color: var(--ink-secondary);
+        }
+
+        /* ── LISTING CARDS (villas, restaurants, beaches) ── */
+        .listing {
+            padding: var(--space-lg);
+            background: var(--bg-warm);
+            border-radius: 8px;
+            margin: var(--space-sm) 0;
+        }
+
+        .listing-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .listing-detail {
+            font-size: 0.85rem;
+            color: var(--ink-secondary);
+            line-height: 1.6;
+        }
+
+        .listing-price {
+            font-weight: 600;
+            color: var(--terracotta);
+            font-size: 0.88rem;
+            margin-top: 6px;
+        }
+
+        .listing-source {
+            font-size: 0.75rem;
+            color: var(--ink-muted);
+            margin-top: 4px;
+        }
+
+        .listing .tag {
+            margin-bottom: 6px;
+        }
+
+        /* ── ITINERARY ── */
+        .itin {
+            margin: var(--space-md) 0;
+        }
+
+        .itin-day {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        @media (max-width: 500px) {
+            .itin-day {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+        }
+
+        .itin-day:last-child { border-bottom: none; }
+
+        .itin-label {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            color: var(--terracotta);
+            padding-top: 2px;
+        }
+
+        .itin-content {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--ink-secondary);
+        }
+
+        .itin-content strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* ── COMPARISON SECTION ── */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        @media (max-width: 600px) {
+            .compare { grid-template-columns: 1fr; }
+        }
+
+        .compare-col h3 {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .compare-row {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .compare-row:last-child { border-bottom: none; }
+
+        .compare-key {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+
+        .compare-val {
+            font-size: 0.88rem;
+            color: var(--ink-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── PRACTICAL GRID ── */
+        .practical {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .practical-item h4 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .practical-item p {
+            font-size: 0.85rem;
+            color: var(--ink-secondary);
+            line-height: 1.55;
+        }
+
+        /* ── BOTTOM LINE ── */
+        .bottom-line {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: var(--space-xl) var(--space-xl) var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .bottom-line h3 {
+            font-size: 1.3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .bottom-line p {
+            font-size: 0.95rem;
+            color: var(--ink-secondary);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: var(--space-2xl) 0;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--ink-muted);
+            line-height: 1.7;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* stagger children */
+        .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+        .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+        .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+
+        /* hero entrance */
+        .hero-inner > * {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: hero-in 0.8s var(--ease-out) forwards;
+        }
+        .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-inner > *:nth-child(2) { animation-delay: 0.25s; }
+        .hero-inner > *:nth-child(3) { animation-delay: 0.4s; }
+        .hero-inner > *:nth-child(4) { animation-delay: 0.55s; }
+
+        @keyframes hero-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .hero-inner > * { opacity: 1; transform: none; animation: none; }
+            .scroll-progress { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="hero">
-    <h1>Montenegro & Croatia</h1>
-    <div class="subtitle">Villa Holiday Research &mdash; Summer 2026</div>
-    <div class="meta">
-        <span>5 adults</span>
-        <span>August 2026</span>
-        <span>&pound;7&ndash;10k / week</span>
-        <span>Beaches &amp; Food</span>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ════════════ HERO ════════════ -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-kicker">Summer 2026</div>
+        <h1>Montenegro &amp; Croatia,<br><em>researched</em></h1>
+        <p class="hero-body">Mum suggested a dozen spots across Montenegro and the Croatian islands. We dug into every one &mdash; cruise ship schedules, restaurant reviews, villa listings, August crowd reports &mdash; to find the right fit for all five of us.</p>
+        <div class="hero-tags">
+            <span class="hero-tag">5 of us</span>
+            <span class="hero-tag">August</span>
+            <span class="hero-tag">&pound;7&ndash;10k / week</span>
+            <span class="hero-tag">Beaches &amp; food</span>
+        </div>
     </div>
-</div>
+</header>
 
 <div class="container">
 
-    <p style="font-size: 1.05rem; margin: 1.5rem 0 0.5rem;">Your mum suggested nine locations across Montenegro and Croatia. We researched every one against what the group actually wants: <strong>authentic coastal character, good beaches, great restaurants within 30 minutes, no cruise-ship crowds, and no oligarch glitz</strong>.</p>
+    <!-- ════════════ TOP 3 ════════════ -->
+    <section class="section">
+        <h2 class="reveal">Three places survived</h2>
+        <p class="section-lead reveal">Out of twelve options, only three genuinely fit what we&rsquo;re after: authentic character, good beaches within walking distance, great food, no cruise ships, no oligarch glitz, and villas in budget.</p>
 
-    <p style="color: var(--muted);">Three locations survived. Here they are, ranked.</p>
+        <div class="picks stagger">
+            <a href="#sveti-stefan" class="pick-link reveal">
+                <div class="pick-num">1</div>
+                <div class="pick-info">
+                    <div class="label">Montenegro</div>
+                    <h3>Sveti Stefan / Przno</h3>
+                    <p>Fishing village, four beaches, superb food. Our top pick.</p>
+                </div>
+            </a>
+            <a href="#korcula" class="pick-link reveal">
+                <div class="pick-num">2</div>
+                <div class="pick-info">
+                    <div class="label">Croatia</div>
+                    <h3>Kor&ccedil;ula Island</h3>
+                    <p>Wine culture, Michelin dining, true island life.</p>
+                </div>
+            </a>
+            <a href="#ulcinj" class="pick-link reveal">
+                <div class="pick-num">3</div>
+                <div class="pick-info">
+                    <div class="label">Montenegro</div>
+                    <h3>Ulcinj</h3>
+                    <p>14km sandy beach, Ottoman old town, unbeatable value.</p>
+                </div>
+            </a>
+        </div>
+    </section>
 
-    <div class="nav-cards">
-        <a href="#sveti-stefan" class="nav-card">
-            <div class="rank">1</div>
-            <div class="country">Montenegro</div>
-            <h3>Sveti Stefan / Przno</h3>
-            <p>Authentic fishing village, 4 beaches, superb food. Top pick.</p>
-        </a>
-        <a href="#korcula" class="nav-card">
-            <div class="rank">2</div>
-            <div class="country">Croatia</div>
-            <h3>Korcula Island</h3>
-            <p>Wine culture, Michelin dining, island life. Best Croatian option.</p>
-        </a>
-        <a href="#ulcinj" class="nav-card">
-            <div class="rank">3</div>
-            <div class="country">Montenegro</div>
-            <h3>Ulcinj</h3>
-            <p>14km sandy beach, Ottoman old town, unbeatable value. The wildcard.</p>
-        </a>
-    </div>
+    <!-- ════════════ VERDICTS ════════════ -->
+    <section class="section reveal">
+        <h2>Every suggestion, at a glance</h2>
+        <p class="section-lead">Here&rsquo;s what we found for each place on Mum&rsquo;s list &mdash; and the Croatian islands too.</p>
 
-    <!-- ===== VERDICTS TABLE ===== -->
-    <h2>Every Location &mdash; At a Glance</h2>
-
-    <h3>Montenegro</h3>
-    <table class="verdict-table">
-        <thead>
-            <tr><th>Location</th><th>Verdict</th><th>Why</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Perast</strong></td>
-                <td><span class="badge badge-maybe">Day trip</span></td>
-                <td>Beautiful Venetian village, excellent evening restaurants. But <strong>no beaches</strong> and almost no villa stock. Visit for dinner from a base elsewhere.</td>
-            </tr>
-            <tr>
-                <td><strong>Kotor</strong></td>
-                <td><span class="badge badge-no">Avoid</span></td>
-                <td>4&ndash;6 cruise ships daily in August. 15,000+ day-trippers into a town of 23,000. Local restaurant owners close up because &ldquo;the season kills the magic.&rdquo;</td>
-            </tr>
-            <tr>
-                <td><strong>Lu&scaron;tica Bay</strong></td>
-                <td><span class="badge badge-no">Wrong fit</span></td>
-                <td>Good news: it&rsquo;s <em>not</em> the cruise ship dock (that&rsquo;s Kotor). Bad news: purpose-built luxury resort, partly under construction. One reviewer: &ldquo;a soulless ghost town.&rdquo; No authentic village life.</td>
-            </tr>
-            <tr>
-                <td><strong>Budva</strong></td>
-                <td><span class="badge badge-no">Avoid</span></td>
-                <td>Montenegro&rsquo;s party capital. 45% of all Montenegrin tourism. Packed sun-loungers, loud music, Eastern European party crowd. Old town described as &ldquo;tacky.&rdquo;</td>
-            </tr>
-            <tr>
-                <td><strong>Sveti Stefan</strong></td>
-                <td><span class="badge badge-yes">Top pick</span></td>
-                <td>Przno fishing village base. 4 beaches, superb food, no cruise ships, authentic character. Budget buys top-tier here.</td>
-            </tr>
-            <tr>
-                <td><strong>Ulcinj</strong></td>
-                <td><span class="badge badge-yes">Recommended</span></td>
-                <td>Most authentic spot on the list. Ottoman old town, 14km sandy beach, excellent cheap seafood. Rawer infrastructure, further from airport.</td>
-            </tr>
-            <tr>
-                <td><strong>Tivat</strong></td>
-                <td><span class="badge badge-no">Fails brief</span></td>
-                <td>Porto Montenegro marina = documented oligarch yacht parking. Russian superyachts reported here even during sanctions. Town behind the marina is fine, but Porto Montenegro is unavoidable.</td>
-            </tr>
-            <tr>
-                <td><strong>Kola&scaron;in</strong></td>
-                <td><span class="badge badge-maybe">Day trip</span></td>
-                <td>Beautiful mountains, genuinely peaceful. But not coastal. Worth a one-day excursion &mdash; Biogradska Gora is one of Europe&rsquo;s last virgin forests.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Croatian Islands</h3>
-    <table class="verdict-table">
-        <thead>
-            <tr><th>Island</th><th>Verdict</th><th>Why</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Kor&ccedil;ula</strong></td>
-                <td><span class="badge badge-yes">Best island</span></td>
-                <td>Genuine food &amp; wine culture (Michelin-starred LD, family konobas since 1974), indigenous grapes. Manageable crowds if based outside town.</td>
-            </tr>
-            <tr>
-                <td><strong>Bra&ccedil;</strong></td>
-                <td><span class="badge badge-maybe">Good backup</span></td>
-                <td>Best logistics (50-min ferry from Split). Deepest villa stock. But Zlatni Rat beach is a zoo in August. Base near Milna, not Bol.</td>
-            </tr>
-            <tr>
-                <td><strong>Lo&scaron;inj</strong></td>
-                <td><span class="badge badge-maybe">Quiet but awkward</span></td>
-                <td>Least crowded of all four. But: no commercial airport, 3h45 bus from Rijeka, thinner villa stock, food scene drifts Japanese/Greek rather than local.</td>
-            </tr>
-            <tr>
-                <td><strong>Krk</strong></td>
-                <td><span class="badge badge-no">Eliminate</span></td>
-                <td>Bridge to mainland = car-crowded mass tourism. &ldquo;Insanely touristy&rdquo; in August. Wrong crowd entirely.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- ===== TOP PICK: SVETI STEFAN ===== -->
-    <div id="sveti-stefan" class="rec-section top-pick">
-        <div class="rec-header">
-            <div class="rec-number">1</div>
-            <div class="rec-title">
-                <div class="country-tag">Montenegro</div>
-                <h3>Sveti Stefan / Przno</h3>
+        <div class="verdict-group-label">Montenegro</div>
+        <div class="verdicts">
+            <div class="verdict-row">
+                <div class="verdict-name">Perast</div>
+                <span class="tag tag-visit">Day trip</span>
+                <div class="verdict-why">Stunning Venetian village. Excellent evening restaurants. But <strong>no beaches</strong> and almost no villa stock &mdash; visit for dinner from a base elsewhere.</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Kotor</div>
+                <span class="tag tag-skip">Avoid</span>
+                <div class="verdict-why">4&ndash;6 cruise ships daily in August. 15,000+ day-trippers into a town of 23,000. Local restaurant owners close up because &ldquo;the season kills the magic.&rdquo;</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Lu&scaron;tica Bay</div>
+                <span class="tag tag-skip">Wrong fit</span>
+                <div class="verdict-why">Good news: it&rsquo;s <em>not</em> the cruise ship dock (that&rsquo;s Kotor). Bad news: a purpose-built luxury resort, still partly under construction. One reviewer called it &ldquo;a soulless ghost town.&rdquo;</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Budva</div>
+                <span class="tag tag-skip">Avoid</span>
+                <div class="verdict-why">Montenegro&rsquo;s party capital. 45% of all its tourism. Packed sun-loungers, loud music, Eastern European party crowd. The old town is described as &ldquo;tacky.&rdquo;</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Sveti Stefan</div>
+                <span class="tag tag-go">Top pick</span>
+                <div class="verdict-why">Przno fishing village. Four beaches, superb food, no cruise ships, completely authentic. Our budget buys the top tier here.</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Ulcinj</div>
+                <span class="tag tag-go">Recommended</span>
+                <div class="verdict-why">Most authentic spot on the entire list. Ottoman old town, 14km sandy beach, genuinely excellent cheap seafood. Rawer infrastructure, further from the airport.</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Tivat</div>
+                <span class="tag tag-skip">Fails brief</span>
+                <div class="verdict-why">Porto Montenegro marina = documented oligarch yacht parking. Russian superyachts were reported here even during sanctions. The town behind it is fine, but the marina is unavoidable.</div>
+            </div>
+            <div class="verdict-row">
+                <div class="verdict-name">Kola&scaron;in</div>
+                <span class="tag tag-visit">Day trip</span>
+                <div class="verdict-why">Beautiful mountains, genuinely peaceful. But not coastal. Worth a day excursion &mdash; Biogradska Gora is one of Europe&rsquo;s last virgin forests.</div>
             </div>
         </div>
 
-        <div class="score-grid">
-            <div class="score-item">
-                <div class="label">Beaches</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+        <div class="verdict-group-label">Croatian Islands</div>
+        <div class="verdicts">
+            <div class="verdict-row">
+                <div class="verdict-name">Kor&ccedil;ula</div>
+                <span class="tag tag-go">Best island</span>
+                <div class="verdict-why">Genuine food &amp; wine culture (Michelin-starred LD, family konobas since 1974), indigenous grapes. Manageable crowds if we base outside the old town.</div>
             </div>
-            <div class="score-item">
-                <div class="label">Food</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            <div class="verdict-row">
+                <div class="verdict-name">Bra&ccedil;</div>
+                <span class="tag tag-visit">Backup</span>
+                <div class="verdict-why">Best logistics (50-min ferry from Split). Deepest villa stock. But Zlatni Rat beach is a zoo in August. Would need to base near Milna, not Bol.</div>
             </div>
-            <div class="score-item">
-                <div class="label">Authenticity</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            <div class="verdict-row">
+                <div class="verdict-name">Lo&scaron;inj</div>
+                <span class="tag tag-visit">Awkward</span>
+                <div class="verdict-why">Least crowded of the four islands. But: no commercial airport, nearly four hours from Rijeka, thinner villa stock, food scene drifts Japanese/Greek rather than local Croatian.</div>
             </div>
-            <div class="score-item">
-                <div class="label">Crowds</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            <div class="verdict-row">
+                <div class="verdict-name">Krk</div>
+                <span class="tag tag-skip">Eliminate</span>
+                <div class="verdict-why">Bridge to the mainland means car-crowded mass tourism. &ldquo;Insanely touristy&rdquo; in August. Wrong crowd entirely.</div>
             </div>
-            <div class="score-item">
-                <div class="label">Value</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+        </div>
+    </section>
+
+    <!-- ════════════ #1 SVETI STEFAN ════════════ -->
+    <section class="rec reveal" id="sveti-stefan">
+        <div class="rec-eyebrow">
+            <div class="rec-rank">01</div>
+            <div class="rec-meta">
+                <div class="label">Montenegro</div>
+                <h2>Sveti Stefan / Przno</h2>
             </div>
         </div>
 
-        <p>The fishing village of <strong>Przno</strong>, ten minutes north of Budva but a world apart, ticks every box. Fishermen still work from the beach in the morning. Four distinct beaches are within walking distance. The restaurant scene &mdash; anchored by Drago (est. 1967) &mdash; is genuinely excellent. Zero cruise ships. And your &pound;7&ndash;10k budget buys you the top tier of Montenegrin villa stock, because Montenegro is <strong>23% cheaper</strong> than Croatia.</p>
+        <p class="rec-intro">The fishing village of <strong>Przno</strong>, ten minutes north of Budva but a world apart. Fishermen still work from the beach in the morning. Four beaches are within walking distance. The restaurant scene is genuinely excellent. Zero cruise ships. And our budget buys the top tier here, because Montenegro is <strong>23% cheaper</strong> than Croatia.</p>
 
-        <div class="callout callout-good">
-            <strong>Glitz check:</strong> The Aman resort on Sveti Stefan island is ultra-luxury but discreetly so &mdash; invisible if you&rsquo;re not a guest. The public beach flanking the causeway was open and free as of 2024. The surrounding area is authentic fishing village, not oligarch territory.
+        <div class="scores">
+            <div class="score">
+                <span class="label">Beaches</span>
+                <div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div></div>
+            </div>
+            <div class="score">
+                <span class="label">Food</span>
+                <div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div>
+            </div>
+            <div class="score">
+                <span class="label">Authentic</span>
+                <div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div></div>
+            </div>
+            <div class="score">
+                <span class="label">Crowds</span>
+                <div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div></div>
+            </div>
+            <div class="score">
+                <span class="label">Value</span>
+                <div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div>
+            </div>
         </div>
 
-        <div class="detail-grid">
-            <div class="detail-item">
-                <h4>Getting There</h4>
+        <div class="callout callout-olive">
+            <strong>Aman reopening, July 2026:</strong> Sveti Stefan Beach and King&rsquo;s Beach are now publicly accessible under the new settlement. Queen&rsquo;s Beach remains Aman guests only. This is a big change &mdash; the beaches were previously blocked off.
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h4>Getting there</h4>
                 <ul>
                     <li>easyJet direct from Gatwick/Luton to Tivat</li>
                     <li>Flight: ~2h 45min</li>
@@ -595,605 +959,353 @@
                     <li>BA also flies Heathrow&ndash;Tivat 3x/week</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Budget Reality</h4>
+            <div class="info-box">
+                <h4>Budget</h4>
                 <ul>
-                    <li>5-bed villa with heated pool &amp; sea views: confirmed ~&pound;5,900/wk</li>
-                    <li>&pound;7&ndash;10k = top 10&ndash;15% of all MNE rental stock</li>
-                    <li>Montenegro 23% cheaper than Croatia overall</li>
+                    <li>5-bed villa, heated pool, sea views: ~&pound;5,900/wk confirmed</li>
+                    <li>&pound;7&ndash;10k = top 10&ndash;15% of all MNE villa stock</li>
+                    <li>Montenegro is 23% cheaper overall</li>
                     <li>Restaurant dinners roughly half Croatian prices</li>
                 </ul>
             </div>
-            <div class="detail-item">
+            <div class="info-box">
                 <h4>Beaches</h4>
                 <ul>
                     <li><strong>Sveti Stefan Beach</strong> &mdash; pink sand crescent</li>
                     <li><strong>Queen&rsquo;s Beach</strong> &mdash; sheltered cove, cypress trees</li>
-                    <li><strong>Milo&ccedil;er Beach</strong> &mdash; quieter, tree-lined</li>
-                    <li><strong>Przno Beach</strong> &mdash; village beach, restaurants above</li>
+                    <li><strong>Milo&ccedil;er Beach</strong> &mdash; royal pines, pink pebbles</li>
+                    <li><strong>Przno Beach</strong> &mdash; village beach, restaurants right there</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Key Restaurants</h4>
+            <div class="info-box">
+                <h4>Key restaurants</h4>
                 <ul>
-                    <li><strong>Drago</strong> (Przno) &mdash; since 1967, local institution</li>
-                    <li><strong>Femelja Kentera</strong> &mdash; terraced hillside, island views</li>
-                    <li><strong>&Ccedil;atovi&cacute;a Mlini</strong> (30 min) &mdash; rated Montenegro&rsquo;s best</li>
-                    <li><strong>Hotel Conte</strong> (Perast) &mdash; benchmark bay seafood</li>
+                    <li><strong>Konoba Langust</strong> (Przno) &mdash; own fishing boats, 20+ years</li>
+                    <li><strong>Drago</strong> (Przno) &mdash; est. 1967, local institution</li>
+                    <li><strong>&Ccedil;atovi&cacute;a Mlini</strong> (30 min) &mdash; Montenegro&rsquo;s best restaurant</li>
+                    <li><strong>Olive</strong> &mdash; right at Sveti Stefan beach, under old olive trees</li>
                 </ul>
             </div>
         </div>
 
-        <details class="deep-dive" id="sveti-stefan-deep">
-            <summary>Full deep-dive: restaurants, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
-            <div class="deep-dive-content" id="sveti-stefan-deep-content">
+        <!-- DEEP DIVE -->
+        <details class="dive">
+            <summary>Full guide: villas, restaurants, beaches, day trips &amp; sample week</summary>
+            <div class="dive-body">
 
-                <div class="callout callout-info" style="margin-bottom:1.5rem;">
-                    <strong>Breaking news:</strong> Aman Sveti Stefan reopened 1 July 2026 after a five-year closure. Under the settlement, Sveti Stefan Beach and King&rsquo;s Beach are now <strong>publicly accessible</strong>. Queen&rsquo;s Beach remains Aman-exclusive. This is great news for villa renters.
+                <h4>Villa options</h4>
+                <div class="listing">
+                    <div class="listing-name">Sveti Stefan Dream Villa</div>
+                    <div class="listing-detail">5 bed, 5 en-suite &bull; 3&times;10m heated pool &bull; Panoramic sea &amp; mountain views &bull; Bliziku&cacute;e village above Sveti Stefan &bull; 270m&sup2;, modern-traditional architecture</div>
+                    <div class="listing-price">&euro;6,965/week (~&pound;5,900)</div>
+                    <div class="listing-source">montenegrovillas.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Villa Sveti Stefan</div>
+                    <div class="listing-detail">4 bed across three levels &bull; Full-size pool &bull; 360&deg; views &bull; Modern stone mansion &bull; Outdoor kitchen with brick oven</div>
+                    <div class="listing-price">Prices on request &mdash; likely &pound;7&ndash;10k range</div>
+                    <div class="listing-source">montenegrovillas.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">4-Bed Villa with Infinity Pool (SV014)</div>
+                    <div class="listing-detail">4 bed (2 double, 2 twin) &bull; Infinity pool, sea views &bull; Re&zcaron;evi&cacute;i hills, 400m to beach &bull; BBQ, parking</div>
+                    <div class="listing-price">~&pound;3,073/week &mdash; well below budget</div>
+                    <div class="listing-source">croatianvillas.com</div>
+                </div>
+                <p>The Dream Villa at ~&pound;5,900/week is the clearest confirmed option. Also check Oliver&rsquo;s Travels and Airbnb Luxe with August 2026 dates. Book 4&ndash;6 months ahead.</p>
+
+                <h4>Restaurant guide</h4>
+                <p><strong>Przno village</strong> (5 min walk)</p>
+                <div class="listing">
+                    <div class="listing-name">Konoba Langust</div>
+                    <div class="listing-detail">Family-run for 20+ years on the beach promenade. Operates its own fishing boats &mdash; catch is genuinely daily fresh. Grilled whole fish, lobster, octopus. 140-cover garden &amp; sea-view terrace.</div>
+                    <div class="listing-price">~&euro;35&ndash;50/head incl. wine &bull; Book ahead: +382 69 023559</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Blanche</div>
+                    <div class="listing-detail">Upmarket modern seafood on the Przno seafront. Good wine list. ~&euro;50&ndash;70/head. Book ahead.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Konoba More</div>
+                    <div class="listing-detail">Traditional tavern at the water&rsquo;s edge. More local, less touristy. Simple grilled fish, mussels, cold mezes. ~&euro;20&ndash;30/head.</div>
+                </div>
+                <p><strong>Sveti Stefan area</strong></p>
+                <div class="listing">
+                    <div class="listing-name">Olive Restaurant</div>
+                    <div class="listing-detail">Under centuries-old olive trees with views of the 15th-century island. Probably the most scenic lunch spot in the area. Seafood risotto, grilled octopus. Mains &euro;14&ndash;24.</div>
+                </div>
+                <p><strong>Worth the drive</strong></p>
+                <div class="listing">
+                    <span class="tag tag-star">Signature dinner</span>
+                    <div class="listing-name">&Ccedil;atovi&cacute;a Mlini &mdash; Morinj (45&ndash;60 min)</div>
+                    <div class="listing-detail">The standout fine-dining destination of the entire coast. Hidden behind a village entrance, reveals a restored 200-year-old flour mill with lawns, streams, ducks, peacocks. Salt-baked whole fish (order in advance). Zen-like setting.</div>
+                    <div class="listing-price">~&euro;45&ndash;60/head &bull; Book weeks ahead: +382 32 373 030</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Jadran &mdash; Budva Old Town (20 min)</div>
+                    <div class="listing-detail">Est. 1976 on the seafront. Grilled daily catch, lobster buzara, stuffed squid. Traditional coal grill. Book 2 days ahead in August.</div>
                 </div>
 
-                <h4>Villa Options</h4>
-
-                <div class="villa-card">
-                    <strong>Sveti Stefan Dream Villa</strong> &mdash; 5 bed, 5 en-suite bath, sleeps 10<br>
-                    3&times;10m heated pool, pergola shading, panoramic sea &amp; mountain views. Bliziku&cacute;e village above Sveti Stefan. 270m&sup2;, modern-traditional Montenegrin architecture.<br>
-                    <strong>&euro;6,965/week (~&pound;5,900)</strong> &mdash; sits comfortably in budget.<br>
-                    <em>montenegrovillas.com</em>
+                <h4>Beach guide</h4>
+                <p>All four main beaches form a walkable chain connected by a coastal pine forest path.</p>
+                <div class="listing">
+                    <div class="listing-name">Sveti Stefan Beach</div>
+                    <div class="listing-detail">Pink-tinged pebble (calcium shell fragments). Left side free (sunbeds ~&euro;30/pair). Right side now publicly accessible (2026 settlement). Crystal clear turquoise water. Go before 10am.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Milo&ccedil;er Beach (King&rsquo;s Beach)</div>
+                    <div class="listing-detail">Fine pink pebbles, &ldquo;almost velvety.&rdquo; 380m long. Now publicly accessible. 10-min walk through Milo&ccedil;er Forest Park (century-old royal pines). Bring supplies &mdash; limited facilities. The forest walk is itself a highlight.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Queen&rsquo;s Beach</div>
+                    <div class="listing-detail">Sand and pebble, 120m, sheltered cove with cypress and olive trees. Aman guests only under the 2026 settlement. The most secluded of the four.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Przno Beach</div>
+                    <div class="listing-detail">Sandy-pebble mix, crescent bay. Most crowded of the four &mdash; arrive early. Restaurants directly on the beach. Atmospheric in the evening when fishing boats return.</div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Villa Sveti Stefan</strong> &mdash; 4 bed across three levels, 6 bath<br>
-                    Full-size pool, 360&deg; sea/mountain views. Modern stone mansion minutes from the islet. Outdoor kitchen with brick oven.<br>
-                    <strong>Prices on request</strong> &mdash; likely &pound;7&ndash;10k range given spec.<br>
-                    <em>montenegrovillas.com</em>
-                </div>
-
-                <div class="villa-card">
-                    <strong>4-Bed Villa with Infinity Pool (SV014)</strong> &mdash; 4 bed (2 double, 2 twin), sleeps 8&ndash;10<br>
-                    Private infinity pool with sea views. Re&zcaron;evi&cacute;i hills, 400m to beach. Two connected apartments, BBQ, parking.<br>
-                    <strong>~&pound;3,073/week</strong> &mdash; well below budget, great value option.<br>
-                    <em>croatianvillas.com</em>
-                </div>
-
-                <div class="villa-card">
-                    <strong>Villa Cirque</strong> &mdash; 5 bed with en-suite<br>
-                    Oliver&rsquo;s Travels, Sveti Stefan South Coast. Dynamic pricing &mdash; search with August 2026 dates.<br>
-                    <em>oliverstravels.com</em>
-                </div>
-
-                <p style="color:var(--muted); font-size:0.88rem; margin-top:0.8rem;"><strong>Booking tip:</strong> The Dream Villa at ~&pound;5,900/wk is the clearest confirmed option. Also search Airbnb luxury and Oliver&rsquo;s Travels with August 2026 dates. Book 4&ndash;6 months ahead.</p>
-
-                <h4>Restaurant Guide</h4>
-
-                <p style="font-style:italic; color:var(--muted); margin-bottom:0.8rem;">Przno village &mdash; 5 min walk/drive</p>
-
-                <div class="restaurant-card">
-                    <strong>Konoba Langust</strong> &mdash; The standout. Family-run for 20+ years, on the beach promenade. Operates its own fishing boats &mdash; catch is genuinely daily fresh. Grilled whole fish, lobster, octopus. Garden &amp; sea-view terrace (140 covers).<br>
-                    ~&euro;35&ndash;50/head incl. wine. <strong>Book ahead in August</strong> &mdash; +382 69 023559 or foodbook.me
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Blanche</strong> &mdash; Upmarket modern dining on the Przno seafront. Contemporary Adriatic seafood, good wine list. ~&euro;50&ndash;70/head. Book ahead.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Konoba More</strong> &mdash; Traditional tavern at the water&rsquo;s edge. More local, less touristy. Simple honest seafood &mdash; grilled fish, mussels, cold mezes. ~&euro;20&ndash;30/head.
-                </div>
-
-                <p style="font-style:italic; color:var(--muted); margin:1rem 0 0.8rem;">Sveti Stefan immediate area</p>
-
-                <div class="restaurant-card">
-                    <strong>Olive Restaurant &amp; Bar</strong> &mdash; Right next to Sveti Stefan beach, under centuries-old olive trees with views of the 15th-century island. Probably the most scenic lunch spot in the area. Seafood risotto, grilled octopus. Mains &euro;14&ndash;24. Mixed reviews on consistency but the setting is unmatched.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Adrovic Restaurant</strong> &mdash; Large terrace with iconic Sveti Stefan island views. Traditional Montenegrin menu. Local cheeses, fresh fish. Mid-range.
-                </div>
-
-                <p style="font-style:italic; color:var(--muted); margin:1rem 0 0.8rem;">Worth the drive</p>
-
-                <div class="restaurant-card">
-                    <strong>Konoba &Ccedil;atovi&cacute;a Mlini</strong> (Morinj, 45&ndash;60 min) &mdash; <span class="badge badge-star">Signature dinner</span><br>
-                    The standout fine-dining destination of the entire Montenegrin coast. Hidden behind an unassuming village entrance, reveals a restored 200-year-old flour mill with lawns, streams, ducks, geese, peacocks. Salt-baked whole fish (order in advance for groups), excellent desserts and wine list.<br>
-                    ~&euro;45&ndash;60/head. <strong>Book weeks ahead</strong> &mdash; +382 32 373 030 or catovicamlini.com
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Jadran</strong> (Budva Old Town, 20 min) &mdash; Est. 1976, right on the seafront. Grilled daily catch, lobster buzara, stuffed squid. Traditional coal grill. Book 2 days ahead in August.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Konoba Mediterraneo</strong> (Petrovac, 20 min south) &mdash; #1-rated in Petrovac. Tables between lemon trees overlooking the bay. Fish stew, black risotto, Mediterranean fish platter.
-                </div>
-
-                <h4>Beach Guide</h4>
-
-                <p style="margin-bottom:0.8rem;">All four main beaches form a walkable chain connected by a coastal pine forest path &mdash; one of the genuine pleasures of the area.</p>
-
-                <div class="beach-card">
-                    <strong>Sveti Stefan Beach</strong> &mdash; Pink-tinged pebble (calcium shell fragments). Left/public side is free (sunbeds ~&euro;30/pair). Right side now publicly accessible following the 2026 Aman settlement. Moderate-high crowds in August. Go before 10am for photography. Crystal clear turquoise water.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Milo&ccedil;er Beach (King&rsquo;s Beach)</strong> &mdash; Fine pink pebbles, &ldquo;almost velvety.&rdquo; 380m long. Now publicly accessible (2026 settlement). 10-min walk through Milo&ccedil;er Forest Park (century-old royal pines). Limited facilities &mdash; bring supplies. The forest walk is itself a highlight.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Queen&rsquo;s Beach</strong> &mdash; Sand and pebble, 120m, sheltered cove with cypress and olive trees. <strong>Aman guests only</strong> under the 2026 settlement. The most secluded of the four.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Przno Beach</strong> &mdash; Sandy-pebble mix, crescent bay. Partially reserved by Maestral Resort; public portion free. Most crowded of the four &mdash; arrive early. Seafront restaurants directly on beach (Langust, Blanche). Atmospheric in the evening with fishing boats returning.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Petrovac Beach</strong> (20 min south) &mdash; Sandy &mdash; the best sand beach in the region. Busier but more manageable than Budva. Beach bars, two small pine-forested islands visible offshore. Combine with lunch at Konoba Mediterraneo.
-                </div>
-
-                <h4>Day Trips</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Kotor</div>
-                        <div class="day-content">
-                            <strong>35km, 45&ndash;50 min.</strong> UNESCO walled medieval city. Genuinely one of the most beautiful old towns in Europe. <strong>Crucial:</strong> leave by 7:30am, arrive 8am, leave by 11am before cruise ships overwhelm it. Hike the San Giovanni fortress walls (free before 8am, &euro;8 after). Cathedral of St Tryphon. Or return at dusk when cruise crowds leave &mdash; magical.
-                        </div>
+                <h4>Day trips</h4>
+                <div class="itin">
+                    <div class="itin-day">
+                        <div class="itin-label">Kotor</div>
+                        <div class="itin-content"><strong>35km, 45&ndash;50 min.</strong> UNESCO walled medieval city. Genuinely one of Europe&rsquo;s most beautiful old towns. Leave by 7:30am, arrive 8am, leave by 11am before cruise ships overwhelm it. Hike the fortress walls (free before 8am, &euro;8 after). Or return at dusk when crowds leave &mdash; magical.</div>
                     </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Perast</div>
-                        <div class="day-content">
-                            <strong>45km, 55&ndash;60 min.</strong> Tiny Baroque village on the Bay of Kotor. Take the boat to Our Lady of the Rocks (&euro;5 return, 5 min) &mdash; an artificial island built by sailors adding stones over centuries. Best in late afternoon/evening when cruise passengers are gone. Golden-hour light on the bay is exceptional.
-                        </div>
+                    <div class="itin-day">
+                        <div class="itin-label">Perast</div>
+                        <div class="itin-content"><strong>45km, 55&ndash;60 min.</strong> Tiny Baroque village on the bay. Boat to Our Lady of the Rocks (&euro;5 return, 5 min) &mdash; an artificial island built by sailors over centuries. Best in late afternoon when cruise passengers are gone. Golden-hour light is exceptional.</div>
                     </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Lov&cacute;en</div>
-                        <div class="day-content">
-                            <strong>60km, ~1.5h.</strong> The Kotor Serpentine: 16 hairpin bends, jaw-dropping views. Njego&scaron; Mausoleum at 1,657m (461 steps, &euro;8). Stop at Njegu&scaron;i village to buy local pr&scaron;ut and cheese direct from producers. Optional add-on: Cetinje (Montenegro&rsquo;s royal capital). Full day &mdash; allow 8&ndash;10 hours. Manageable in a standard rental car.
-                        </div>
+                    <div class="itin-day">
+                        <div class="itin-label">Lov&cacute;en</div>
+                        <div class="itin-content"><strong>60km, ~1.5h.</strong> The Kotor Serpentine: 16 hairpin bends, jaw-dropping views. Njego&scaron; Mausoleum at 1,657m (461 steps, &euro;8). Stop at Njegu&scaron;i village to buy pr&scaron;ut and cheese direct from producers. Full day &mdash; 8&ndash;10 hours.</div>
                     </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Skadar Lake</div>
-                        <div class="day-content">
-                            <strong>50km, ~1h.</strong> Largest lake in the Balkans. Private boat tour recommended (~&euro;90/head for 5 people) &mdash; includes breakfast, lunch, swimming, bird watching, island monastery visits. Depart from Virpazar village. Lily pad fields, Dalmatian Pelicans, clear swimming water.
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Petrovac + Budva</div>
-                        <div class="day-content">
-                            <strong>Half-and-half day.</strong> Petrovac (20 min south) for a sandy beach morning and lunch at Konoba Mediterraneo. Budva Old Town (15 min north) for an evening walk along the medieval walls at sunset, dinner at Jadran.
-                        </div>
+                    <div class="itin-day">
+                        <div class="itin-label">Skadar</div>
+                        <div class="itin-content"><strong>50km, ~1h.</strong> Largest lake in the Balkans. Private boat tour (~&euro;90/head for 5) includes breakfast, lunch, swimming, bird watching, island monasteries. Lily pad fields, pelicans, clear swimming water.</div>
                     </div>
                 </div>
 
-                <h4>Practical Tips</h4>
-
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <h4>Car Rental</h4>
+                <h4>Practical tips</h4>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Car &amp; driving</h4>
                         <ul>
-                            <li>Pick up at Tivat airport (~30km to Sveti Stefan)</li>
-                            <li>Consider two small cars or one 7-seater for 5 people</li>
+                            <li>Pick up at Tivat airport (~30km)</li>
+                            <li>Consider two small cars for 5 people</li>
                             <li>Book 3+ months ahead for August</li>
-                            <li>Get full comprehensive insurance (&euro;10/day)</li>
-                            <li>Drive on the right. Headlights always on. Blood alcohol effectively zero (0.03%)</li>
+                            <li>Get full insurance (&euro;10/day)</li>
+                            <li>Drive on the right, headlights always on</li>
                         </ul>
                     </div>
-                    <div class="detail-item">
-                        <h4>Money</h4>
+                    <div class="info-box">
+                        <h4>Money &amp; mobile</h4>
                         <ul>
-                            <li>Montenegro uses the <strong>Euro</strong></li>
-                            <li>Cards widely accepted in tourist areas</li>
-                            <li>Carry cash for beach vendors, smaller konobas, markets</li>
-                            <li>Tipping: 10% for good service, in cash to server</li>
-                            <li>&ldquo;Kuver&rdquo; (cover charge) &euro;1&ndash;2.50/person is normal, not a scam</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Mobile &amp; Roaming</h4>
-                        <ul>
-                            <li><strong>Montenegro is NOT in the EU</strong> &mdash; EU roaming rules don&rsquo;t apply</li>
-                            <li>O2 out-of-bundle data can be &pound;18/100MB</li>
-                            <li>Best: buy a local SIM at Tivat airport (&euro;15&ndash;25 for 10&ndash;20GB)</li>
-                            <li>Or load an eSIM before departure</li>
-                            <li>Coastal 4G coverage is excellent</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Supermarkets</h4>
-                        <ul>
-                            <li><strong>Voli</strong> and <strong>Idea</strong> are the main chains near Budva</li>
-                            <li>HDL Lakovi&cacute; hypermarket for a big stock-up</li>
-                            <li>Do a main shop in Budva on arrival day</li>
-                            <li>Tap water is safe to drink</li>
+                            <li>Montenegro uses the Euro</li>
+                            <li>Cards accepted in tourist areas; carry cash for markets</li>
+                            <li>Tipping: 10% for good service, cash to server</li>
+                            <li><strong>Not in the EU</strong> &mdash; EU roaming doesn&rsquo;t apply</li>
+                            <li>Buy a local SIM at Tivat (&euro;15&ndash;25 for 10&ndash;20GB) or use an eSIM</li>
                         </ul>
                     </div>
                 </div>
 
-                <h4>Sample Week</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 1</div>
-                        <div class="day-content"><strong>Arrival &amp; settle.</strong> Fly into Tivat, pick up car, drive to villa (~40 min). Afternoon swim at Sveti Stefan Beach. Dinner at Olive Restaurant &mdash; right at the beach, no driving.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 2</div>
-                        <div class="day-content"><strong>Przno village day.</strong> Walk the coastal forest path (20 min). Coffee on the waterfront. Morning swim at Przno Beach. Lunch at Konoba Langust (book ahead). Afternoon walk back via Milo&ccedil;er Forest Park. Evening at the villa pool.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 3</div>
-                        <div class="day-content"><strong>Kotor + Perast.</strong> Leave 7:30am. Climb fortress walls before crowds. Leave Kotor by 11am. Drive to Perast (20 min), boat to Our Lady of the Rocks. Lunch in Perast. Pool afternoon. Local dinner.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 4</div>
-                        <div class="day-content"><strong>Lov&cacute;en &amp; mountains.</strong> Active day. Drive the Kotor Serpentine. Buy pr&scaron;ut in Njegu&scaron;i. Hike to the Mausoleum (461 steps). Picnic at Ivanova Korita meadows. Home by 5&ndash;6pm. Villa dinner with local wine and Njegu&scaron;i prosciutto.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 5</div>
-                        <div class="day-content"><strong>Full beach day.</strong> No driving. Milo&ccedil;er Beach in the morning (bring supplies). Long lunch at Olive. Pool afternoon. <strong>Signature dinner at &Ccedil;atovi&cacute;a Mlini</strong> (book weeks ahead). The best meal of the trip.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 6</div>
-                        <div class="day-content"><strong>Lake Skadar boat day.</strong> Pre-booked private boat tour (~&euro;90/head). Full day on the water &mdash; lily pads, pelicans, island monasteries, swimming. Return via Virpazar. Evening BBQ at the villa or Blanche in Przno.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 7</div>
-                        <div class="day-content"><strong>Petrovac &amp; Budva.</strong> Sandy beach morning at Petrovac. Lunch at Konoba Mediterraneo. Final swim at Sveti Stefan Beach. Evening: Budva Old Town walls at sunset, dinner at Jadran.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 8</div>
-                        <div class="day-content"><strong>Departure.</strong> Morning beach or pool. Tivat airport transfer: 30&ndash;40 min.</div>
-                    </div>
+                <h4>Sample week</h4>
+                <div class="itin">
+                    <div class="itin-day"><div class="itin-label">Day 1</div><div class="itin-content"><strong>Arrive &amp; settle.</strong> Fly into Tivat, drive to villa (~40 min). Afternoon swim at Sveti Stefan Beach. Dinner at Olive &mdash; right at the beach, no driving.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 2</div><div class="itin-content"><strong>Przno village.</strong> Walk the coastal forest path (20 min). Coffee on the waterfront. Swim at Przno Beach. Lunch at Konoba Langust. Walk back via Milo&ccedil;er Forest Park. Evening at the pool.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 3</div><div class="itin-content"><strong>Kotor + Perast.</strong> Leave 7:30am. Climb fortress walls before crowds. Leave by 11am. Drive to Perast, boat to Our Lady of the Rocks. Lunch in Perast. Pool afternoon.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 4</div><div class="itin-content"><strong>Lov&cacute;en &amp; mountains.</strong> Drive the Kotor Serpentine. Buy pr&scaron;ut in Njegu&scaron;i. Hike to the Mausoleum (461 steps). Villa dinner with local wine and Njegu&scaron;i prosciutto.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 5</div><div class="itin-content"><strong>Full beach day.</strong> No driving. Milo&ccedil;er Beach in the morning. Long lunch at Olive. Pool afternoon. <strong>Signature dinner at &Ccedil;atovi&cacute;a Mlini</strong> (book weeks ahead). The best meal of the trip.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 6</div><div class="itin-content"><strong>Lake Skadar.</strong> Private boat tour (~&euro;90/head). Full day on the water &mdash; lily pads, pelicans, island monasteries, swimming. Return via Virpazar. Evening BBQ at the villa.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 7</div><div class="itin-content"><strong>Petrovac &amp; Budva.</strong> Sandy beach morning at Petrovac. Lunch at Konoba Mediterraneo. Final swim at Sveti Stefan. Evening: Budva Old Town walls at sunset, dinner at Jadran.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 8</div><div class="itin-content"><strong>Depart.</strong> Morning beach or pool. Tivat airport: 30&ndash;40 min.</div></div>
                 </div>
-
             </div>
         </details>
-    </div>
+    </section>
 
-    <!-- ===== #2: KORCULA ===== -->
-    <div id="korcula" class="rec-section">
-        <div class="rec-header">
-            <div class="rec-number">2</div>
-            <div class="rec-title">
-                <div class="country-tag">Croatia</div>
-                <h3>Kor&ccedil;ula Island</h3>
+    <!-- ════════════ #2 KORCULA ════════════ -->
+    <section class="rec reveal" id="korcula">
+        <div class="rec-eyebrow">
+            <div class="rec-rank">02</div>
+            <div class="rec-meta">
+                <div class="label">Croatia</div>
+                <h2>Kor&ccedil;ula Island</h2>
             </div>
         </div>
 
-        <div class="score-grid">
-            <div class="score-item">
-                <div class="label">Beaches</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Food &amp; Wine</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Authenticity</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Crowds</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Value</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
-            </div>
+        <p class="rec-intro">The best option if we specifically want an <strong>island holiday with wine culture</strong>. Kor&ccedil;ula produces indigenous grapes you won&rsquo;t find anywhere else &mdash; Grk (almost unique to Lumbarda), Po&scaron;ip, and Plavac Mali. The food scene runs from Michelin-starred LD to family konobas with tables under fig trees. Crowds are real in August but manageable from a rural base.</p>
+
+        <div class="scores">
+            <div class="score"><span class="label">Beaches</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div><div class="score-pip"></div></div></div>
+            <div class="score"><span class="label">Food &amp; Wine</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div></div>
+            <div class="score"><span class="label">Authentic</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div></div></div>
+            <div class="score"><span class="label">Crowds</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div><div class="score-pip"></div></div></div>
+            <div class="score"><span class="label">Value</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div><div class="score-pip"></div></div></div>
         </div>
 
-        <p>If the group specifically wants an <strong>island holiday</strong> with wine culture, Kor&ccedil;ula is the answer. The island produces indigenous grapes you won&rsquo;t find anywhere else &mdash; Grk (almost unique to Lumbarda), Po&scaron;ip, and Plavac Mali. The food scene runs from Michelin-starred <strong>LD Restaurant</strong> to family konobas with tables under fig trees. Crowds are real in August but manageable if you&rsquo;re villa-based outside the old town, visiting in the evening after cruise boats leave.</p>
-
-        <div class="callout callout-info">
-            <strong>Croatia costs more.</strong> Your &pound;7&ndash;10k budget is realistic but at the ceiling for a 5-bed pool villa in August. Croatia has seen ~50% price inflation over three years and is now the second most expensive Mediterranean destination after France.
+        <div class="callout callout-warm">
+            <strong>Croatia costs more.</strong> Our &pound;7&ndash;10k budget is realistic but at the ceiling for a 5-bed pool villa in August. Croatia has seen roughly 50% price inflation over three years and is now the second most expensive Mediterranean destination after France.
         </div>
 
-        <div class="detail-grid">
-            <div class="detail-item">
-                <h4>Getting There</h4>
+        <div class="info-grid">
+            <div class="info-box">
+                <h4>Getting there</h4>
                 <ul>
-                    <li>Fly to Split or Dubrovnik (both very well served)</li>
-                    <li>Split route: drive to Orebic, 15-min car ferry to Kor&ccedil;ula</li>
-                    <li>~2&ndash;2.5h total from Split Airport</li>
-                    <li>Dubrovnik route: ~2.5h via Pelje&scaron;ac</li>
+                    <li>Fly to Dubrovnik (easyJet/BA, ~20 weekly)</li>
+                    <li>Private minibus to Orebic ferry (&euro;80&ndash;120)</li>
+                    <li>15-min car ferry to Kor&ccedil;ula</li>
+                    <li>~4.5&ndash;5h total from London</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Budget Reality</h4>
+            <div class="info-box">
+                <h4>Budget</h4>
                 <ul>
-                    <li>&pound;7&ndash;10k gets a quality 5&ndash;6 bed pool villa</li>
-                    <li>Not enormous choice &mdash; book early</li>
+                    <li>&pound;7&ndash;10k gets a quality 5-bed pool villa</li>
+                    <li>Not huge choice &mdash; book early</li>
                     <li>Dining: &euro;80+ for two at upscale spots</li>
-                    <li>Croatia 23% pricier than Montenegro</li>
+                    <li>Croatia is 23% pricier than Montenegro</li>
                 </ul>
             </div>
-            <div class="detail-item">
+            <div class="info-box">
                 <h4>Beaches</h4>
                 <ul>
-                    <li><strong>Pupnatska Luka</strong> &mdash; white pebble, turquoise water, beach bar</li>
+                    <li><strong>Pupnatska Luka</strong> &mdash; white pebble horseshoe bay</li>
                     <li><strong>Vela Pr&zcaron;ina</strong> (Lumbarda) &mdash; sandy, family-friendly</li>
-                    <li><strong>Bilin &Zcaron;al</strong> (Lumbarda) &mdash; sandy, shallow</li>
-                    <li><strong>Ba&ccedil;va</strong> &mdash; secluded cliff-backed cove</li>
+                    <li><strong>Ba&ccedil;va</strong> &mdash; secluded cliff cove, great snorkelling</li>
+                    <li><strong>Proizd island</strong> &mdash; clearest water in the region</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Key Restaurants</h4>
+            <div class="info-box">
+                <h4>Key restaurants</h4>
                 <ul>
-                    <li><strong>LD Restaurant</strong> &mdash; Michelin-starred</li>
-                    <li><strong>Konoba Adio Mare</strong> &mdash; same family since 1974</li>
-                    <li><strong>Konoba Mate</strong> (Pupnat) &mdash; fig trees, family produce</li>
-                    <li>Wine tours: Grk &amp; Po&scaron;ip in Smokvica &amp; Cara</li>
+                    <li><strong>LD Restaurant</strong> &mdash; Michelin star, tasting menu</li>
+                    <li><strong>Konoba Mate</strong> (Pupnat) &mdash; Bib Gourmand + Green Star</li>
+                    <li><strong>Konoba Belin</strong> (Zrnovo) &mdash; hand-rolled &Zcaron;rnovski makaruni</li>
+                    <li><strong>Korta Katarina</strong> (Orebic) &mdash; winery + tastings at the ferry</li>
                 </ul>
             </div>
         </div>
 
-        <details class="deep-dive" id="korcula-deep">
-            <summary>Full deep-dive: restaurants, wines, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
-            <div class="deep-dive-content" id="korcula-deep-content">
+        <!-- DEEP DIVE -->
+        <details class="dive">
+            <summary>Full guide: villas, restaurants, wines, beaches, day trips &amp; sample week</summary>
+            <div class="dive-body">
 
-                <h4>Villa Options</h4>
+                <h4>Villa options</h4>
+                <div class="listing">
+                    <div class="listing-name">Grandeur Villa (Oliver&rsquo;s Travels)</div>
+                    <div class="listing-detail">5 bed, 7 bath &bull; Two independent units, each with its own infinity pool &bull; Above Zrnovska Banja Bay, 3&ndash;5 min from town &bull; Sauna, steam room</div>
+                    <div class="listing-price">Price on request &mdash; likely top of &pound;7&ndash;10k</div>
+                    <div class="listing-source">oliverstravels.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Villa Marinella (Oliver&rsquo;s Travels)</div>
+                    <div class="listing-detail">4 bed, all en-suite &bull; Private pool, private jetty &amp; mooring &bull; Complimentary BMW i3 &bull; Kayaks, paddleboards, bikes &bull; Daily maid service</div>
+                    <div class="listing-price">Price on request</div>
+                    <div class="listing-source">oliverstravels.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Villa Kristal (The Villa Collection)</div>
+                    <div class="listing-detail">4 bed, 5 bath &bull; Seafront among olive groves near a monastery &bull; Historic property dating to 1656</div>
+                    <div class="listing-price">~&pound;5,859/week</div>
+                    <div class="listing-source">thevillacollection.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Villa Hera, Lumbarda</div>
+                    <div class="listing-detail">4 bed &bull; Near Pr&zcaron;ina sandy beaches &bull; Surrounded by Grk vineyards &bull; Quiet rural setting</div>
+                    <div class="listing-price">From ~&pound;3,500/week &mdash; great value</div>
+                    <div class="listing-source">villa-hera-lumbarda.com</div>
+                </div>
+                <p>Most operators don&rsquo;t publish August prices &mdash; request quotes directly. A villa near Zrnovska Banja Bay gives the best balance of quiet + access to town and the ferry.</p>
 
-                <div class="villa-card">
-                    <strong>Grandeur Villa (Oliver&rsquo;s Travels)</strong> &mdash; 5 bed, 7 bath, sleeps 10<br>
-                    Two independent units, each with its own infinity pool (35m&sup2; + 40m&sup2;). Above Zrnovska Banja Bay, 3&ndash;5 min drive from Kor&ccedil;ula Town. Sauna, steam room, Bose audio. Nearest restaurant (Konoba Belin) 400m away.<br>
-                    <strong>Price on request</strong> &mdash; likely top of &pound;7&ndash;10k range.<br>
-                    <em>oliverstravels.com</em>
+                <h4>Wine guide</h4>
+                <p><strong>The grapes:</strong> Grk (white, grows only in Lumbarda, sells out by October), Po&scaron;ip (full-bodied white from Cara &amp; Smokvica, Croatia&rsquo;s most celebrated), Plavac Mali (robust red, related to Zinfandel), Rukatac (ancient white, 1,000+ years on the island).</p>
+                <p><strong>Where to taste:</strong> On the island: Bire, Vitis, Sabulum, Popic (all small family operations, &euro;12&ndash;20). &ldquo;Slurp of Grk&rdquo; guided tour from Kor&ccedil;ula Explorer. On Pelje&scaron;ac (15-min ferry): Grgic Vina (Napa legend, walk-ins welcome), Matusko (Dinga&ccedil; cellars), Edivo (underwater winery &mdash; wines aged 14m below sea), Korta Katarina (at the ferry terminal).</p>
+
+                <h4>Restaurant guide</h4>
+                <div class="listing">
+                    <span class="tag tag-star">Michelin star</span>
+                    <div class="listing-name">LD Restaurant &mdash; Kor&ccedil;ula Town</div>
+                    <div class="listing-detail">Six-course tasting menu with matching wines. Five consecutive years as Croatia&rsquo;s most Wine Friendly restaurant. Tasting ~&euro;120+, mains &euro;40&ndash;70. Book well in advance.</div>
+                </div>
+                <div class="listing">
+                    <span class="tag tag-star">Bib Gourmand + Green Star</span>
+                    <div class="listing-name">Konoba Mate &mdash; Pupnat (15 min from town)</div>
+                    <div class="listing-detail">Family konoba under fig trees. Home-cured charcuterie, aged goat&rsquo;s cheese, handmade ravioli with sage. Walk-ins impossible in season. Book: +385 20 717 109</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Konoba Maha &mdash; Zrnovo</div>
+                    <div class="listing-detail">Two brothers, since 2003. Modern Dalmatian cooking, handmade cocktails with domestic plants. Peka (must order 24hrs ahead).</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Restaurant Filippi &mdash; Kor&ccedil;ula Town</div>
+                    <div class="listing-detail">Michelin-recognised. Modern Dalmatian cuisine, sea views across the Pelje&scaron;ac channel. Strong mid-tier.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Vrnik Arts Club &mdash; Vrnik islet (by boat)</div>
+                    <div class="listing-detail">Tiny island, tranquil terrace. Swordfish ceviche, local cheese with pr&scaron;ut, fresh seafood. Scenic and uncrowded.</div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Villa Marinella (Oliver&rsquo;s Travels)</strong> &mdash; 4 bed, all en-suite with balconies, sleeps 8<br>
-                    Southern coast sheltered bay, 5.7km from Kor&ccedil;ula Town. Private pool, private jetty &amp; mooring. <strong>Complimentary BMW i3 included.</strong> Kayaks, paddleboards, mountain bikes. Daily maid service, villa host.<br>
-                    <strong>Price on request.</strong><br>
-                    <em>oliverstravels.com</em>
+                <h4>Day trips</h4>
+                <div class="itin">
+                    <div class="itin-day"><div class="itin-label">Mljet</div><div class="itin-content"><strong>Catamaran 35&ndash;45 min.</strong> National park with salt lakes. Bike around them, take the lake boat to the Benedictine monastery. ~&euro;20&ndash;25 return + &euro;15&ndash;25 park entry. <strong>Best nature day of the week.</strong></div></div>
+                    <div class="itin-day"><div class="itin-label">Pelje&scaron;ac</div><div class="itin-content"><strong>15-min car ferry.</strong> Wine day: Korta Katarina, Grgic Vina (walk-ins, 30 min), Matusko (cellars), Edivo (underwater winery &mdash; book ahead). Works for all ages.</div></div>
+                    <div class="itin-day"><div class="itin-label">Hvar</div><div class="itin-content"><strong>Catamaran 1&ndash;1.5h.</strong> Venetian architecture, hilltop fortress. More crowded and party-oriented &mdash; better for the younger contingent. Book ferry ahead, sells out in August.</div></div>
+                    <div class="itin-day"><div class="itin-label">Proizd</div><div class="itin-content"><strong>50-min drive + 20-min taxi boat.</strong> Uninhabited island. Clearest water in the area. One restaurant. Total peace.</div></div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Villa Kristal (The Villa Collection)</strong> &mdash; 4 bed, 5 bath, sleeps 8<br>
-                    Seafront among olive groves near a monastery. Historic property dating to 1656.<br>
-                    <strong>~&pound;5,859/week</strong><br>
-                    <em>thevillacollection.com</em>
+                <h4>Sample week</h4>
+                <div class="itin">
+                    <div class="itin-day"><div class="itin-label">Day 1</div><div class="itin-content"><strong>Arrival.</strong> Fly to Dubrovnik, private transfer (~4.5h). Settle in, swim, grocery run. Villa dinner.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 2</div><div class="itin-content"><strong>Kor&ccedil;ula Town.</strong> Morning at Banje beach. Walk the walls, cathedral, Marco Polo house. Lunch at Filippi. Afternoon at Bilin &Zcaron;al. <strong>Evening: LD Restaurant</strong> &mdash; the Michelin highlight.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 3</div><div class="itin-content"><strong>Wine villages.</strong> Late breakfast at Konoba Belin, Zrnovo. Smokvica &amp; Cara for Po&scaron;ip tasting. Afternoon at Pupnatska Luka beach. Fish at the beach konoba.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 4</div><div class="itin-content"><strong>Mljet.</strong> Catamaran 8:30am. Bike the salt lakes. Monastery island. Swim in Veliko Jezero. Return ~5pm. <strong>Best nature day.</strong></div></div>
+                    <div class="itin-day"><div class="itin-label">Day 5</div><div class="itin-content"><strong>Pelje&scaron;ac wine day.</strong> Ferry to Orebic. Korta Katarina, Grgic Vina, Saints Hills vineyard lunch. Optional: Edivo underwater winery.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 6</div><div class="itin-content"><strong>Lumbarda &amp; Mate.</strong> Sandy beach at Vela Pr&zcaron;ina (arrive 9am). Grk tasting in Lumbarda. <strong>Evening: Konoba Mate</strong> &mdash; the Michelin Bib Gourmand. Don&rsquo;t miss the ravioli.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 7</div><div class="itin-content"><strong>Hvar or Proizd.</strong> Catamaran to Hvar for the younger group, or taxi boat to Proizd for crystal-clear swimming. Farewell sunset drinks.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 8</div><div class="itin-content"><strong>Depart.</strong> Allow 5+ hours to Dubrovnik Airport. Buy olive oil &amp; Po&scaron;ip before leaving.</div></div>
                 </div>
-
-                <div class="villa-card">
-                    <strong>Villa Dragulj (The Villa Collection)</strong> &mdash; 5 bed, 7 bath, sleeps 10<br>
-                    Described as an &ldquo;architectural masterpiece.&rdquo;<br>
-                    <strong>~&pound;5,859/week</strong><br>
-                    <em>thevillacollection.com</em>
-                </div>
-
-                <div class="villa-card">
-                    <strong>Villa Hera, Lumbarda</strong> &mdash; 4 bed, near Pr&zcaron;ina sandy beaches<br>
-                    Surrounded by Grk vineyards. Quiet rural setting.<br>
-                    <strong>From ~&pound;3,500/week</strong> &mdash; budget end, great value.<br>
-                    <em>villa-hera-lumbarda.com</em>
-                </div>
-
-                <p style="color:var(--muted); font-size:0.88rem; margin-top:0.8rem;"><strong>Tip:</strong> Most operators don&rsquo;t publish August prices &mdash; request quotes directly. The Orebic&ndash;Domince car ferry (15 min, up to 18x/day) means a villa near Zrnovska Banja Bay gives the best balance of quiet + access.</p>
-
-                <h4>Restaurant Guide</h4>
-
-                <div class="restaurant-card">
-                    <strong>LD Restaurant</strong> &mdash; Kor&ccedil;ula Town &mdash; <span class="badge badge-star">Michelin Star</span><br>
-                    Head chef Marko Gajski. Six-course tasting menu with matching wines, refined Dalmatian-meets-Mediterranean, sea and island views from Old Town waterfront. Five consecutive years as Croatia&rsquo;s most Wine Friendly restaurant.<br>
-                    Tasting menu ~&euro;120+, &agrave; la carte mains &euro;40&ndash;70. <strong>Book well in advance.</strong>
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Konoba Mate</strong> &mdash; Pupnat village (15 min from town) &mdash; <span class="badge badge-star">Michelin Bib Gourmand + Green Star</span><br>
-                    Family konoba under fig trees. Home-cured charcuterie, aged goat&rsquo;s cheese, handmade ravioli with goat&rsquo;s cheese and sage, home-grown vegetables. One of the most acclaimed restaurants in Dalmatia.<br>
-                    <strong>Book essential:</strong> +385 20 717 109 or konobamate@gmail.com. Walk-ins impossible in season.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Konoba Belin</strong> &mdash; Zrnovo village (4km from town)<br>
-                    Traditional Dalmatian family restaurant. Signature: &Zcaron;rnovski makaruni (hand-rolled pasta). Cooking classes available in summer. ~&euro;45&ndash;50/person.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Konoba Maha</strong> &mdash; Zrnovo<br>
-                    Run by two brothers since 2003. Modern take on traditional Dalmatian cooking, handmade cocktails with domestic plants. Specialty: Peka (must order 24hrs in advance).
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Restaurant Filippi</strong> &mdash; Kor&ccedil;ula Town promenade, Michelin-recognised<br>
-                    Modern Dalmatian cuisine with local artisan pasta and fresh herbs. Sea views across the Pelje&scaron;ac channel. Strong mid-tier option.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Vrnik Arts Club</strong> &mdash; Vrnik islet (short boat trip)<br>
-                    Tranquil terrace on a tiny island. Fried shrimp, local cheese with pr&scaron;ut, swordfish ceviche, fresh seafood mains. Scenic and uncrowded.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Saints Hills</strong> &mdash; Zagruda, Pelje&scaron;ac (ferry + 30 min)<br>
-                    Fine dining at a vineyard with Adriatic views toward Mljet. Wine pairing menus. Worth the half-day excursion.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Korta Katarina</strong> &mdash; Orebic (at the ferry port)<br>
-                    Boutique winery. Six tasting experiences including chocolate-wine tasting and five-course royal culinary wine pairing. First or last stop on a Pelje&scaron;ac day.
-                </div>
-
-                <h4>Wine Guide</h4>
-
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <h4>The Grapes</h4>
-                        <ul>
-                            <li><strong>Grk</strong> (white) &mdash; grows only in Lumbarda. Female-only vine requiring cross-pollination. Light greenish-gold, complex, subtle bitter finish. Extremely limited &mdash; sells out by October</li>
-                            <li><strong>Po&scaron;ip</strong> (white) &mdash; from Cara &amp; Smokvica. Full-bodied, notes of apricot and almond. Croatia&rsquo;s most celebrated white internationally</li>
-                            <li><strong>Plavac Mali</strong> (red) &mdash; dominant Dalmatian red. Rich, robust tannins, high alcohol. Genetically related to Zinfandel</li>
-                            <li><strong>Rukatac/Mara&scaron;tina</strong> (white) &mdash; ancient variety, 1,000+ years on the island. Light, balanced, pairs with shellfish</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>Wineries to Visit</h4>
-                        <ul>
-                            <li><strong>Kor&ccedil;ula:</strong> Bire, Vitis, Sabulum, Popic (all small family, Lumbarda/central). Tasting flights &euro;12&ndash;20</li>
-                            <li><strong>&ldquo;Slurp of Grk&rdquo; tour</strong> &mdash; Kor&ccedil;ula Explorer, guided Lumbarda producers tour with transport</li>
-                            <li><strong>Pelje&scaron;ac:</strong> Grgic Vina (Napa legend, walk-ins welcome), Matusko (Dinga&ccedil; tasting), Edivo Vina (underwater winery &mdash; wines aged 14m below sea)</li>
-                            <li><strong>Korta Katarina</strong> (Orebic) &mdash; right at the ferry terminal, no driving needed</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h4>Beach Guide</h4>
-
-                <div class="beach-card">
-                    <strong>Vela Pr&zcaron;ina, Lumbarda</strong> &mdash; Sandy. Largest sandy beach on the island. Shallow 30&ndash;50m &mdash; ideal for all ages. Very busy August; arrive before 9am. 15-min drive from Old Town. Sunset views toward Mljet. Grk wineries walkable.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Bilin &Zcaron;al, Lumbarda</strong> &mdash; Sand/small pebble. Longer and shallower than Vela Pr&zcaron;ina. Moderate crowds. Good afternoon alternative. Beach bars, showers, toilets.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Pupnatska Luka</strong> &mdash; Smooth pale pebble in horseshoe bay. 25&ndash;30 min drive from town. Two seasonal konobas for grilled fish. Most photographed beach on the island. Pine and oak shade. Parking fills before 10am in August.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Ba&ccedil;va</strong> &mdash; Larger pebbles, south coast. Low crowds even in August. Excellent snorkelling (15m visibility). Steep entry &mdash; confident swimmers.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Proizd Island</strong> &mdash; Uninhabited island, 20-min taxi boat from Vela Luka. Smooth white rock coves. Clearest water in the region. One restaurant. Full-day trip recommended.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Banje</strong> &mdash; Pebble/concrete, 5-min walk from Old Town walls. Convenient morning dip. Moderate crowds. Great backdrop.
-                </div>
-
-                <p style="color:var(--muted); font-size:0.88rem; margin-top:0.5rem;"><strong>Cruise ship note:</strong> August typically brings ~5 cruise ship calls. When ships dock, Old Town is overwhelmed for 4&ndash;6 hours. Plan to be at a beach or wine village on those days.</p>
-
-                <h4>Day Trips</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Mljet</div>
-                        <div class="day-content">
-                            <strong>Catamaran 35&ndash;45 min from Kor&ccedil;ula Town.</strong> National Park with salt lakes. Rent bikes, kayak, take the lake boat to the Benedictine monastery on Sveta Marija island. Exceptionally beautiful and quiet. ~&euro;20&ndash;25 return + &euro;15&ndash;25 park entry. Full day, depart ~8:30am. <strong>Best day of the week for natural beauty.</strong>
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Pelje&scaron;ac</div>
-                        <div class="day-content">
-                            <strong>15-min car ferry from Domince.</strong> Wine day: Korta Katarina (at ferry port), Grgic Vina (walk-ins, 30 min drive), Matusko (Dinga&ccedil; cellars), Edivo (underwater winery &mdash; book ahead). Lunch at Saints Hills vineyard. Works for all ages.
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Hvar</div>
-                        <div class="day-content">
-                            <strong>Catamaran 1&ndash;1.5h.</strong> Venetian architecture, hilltop fortress, great market. Significantly more crowded and party-oriented than Kor&ccedil;ula. Better for the younger contingent. Arrive early, leave mid-afternoon. Book ferry ahead &mdash; sells out in August.
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Proizd</div>
-                        <div class="day-content">
-                            <strong>50-min drive to Vela Luka + 20-min taxi boat.</strong> Uninhabited island. Clearest water in the area. One restaurant. Total peace. Best if the group wants a secluded swimming day over sightseeing.
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Getting There &mdash; Detailed</h4>
-
-                <div class="callout callout-info">
-                    <strong>Recommended route:</strong> Fly London &rarr; Dubrovnik (easyJet/BA, ~20 weekly departures, 2h 25&ndash;55m). Private minibus transfer to Orebic/Domince ferry (&euro;80&ndash;120 for 5). 15-min car ferry to Kor&ccedil;ula. Total: ~4.5&ndash;5 hours door to villa.<br><br>
-                    <strong>Car hire:</strong> Easier to pick up on the island (Avax, Smart Rent, Prizmic) than taking a mainland hire car onto the ferry. Book March&ndash;April for August &mdash; island fleet is small.
-                </div>
-
-                <h4>Sample Week</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 1</div>
-                        <div class="day-content"><strong>Arrival.</strong> Fly to Dubrovnik, private transfer to island (~4.5h). Settle in, swim at nearest beach. Grocery run. Low-key villa dinner.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 2</div>
-                        <div class="day-content"><strong>Kor&ccedil;ula Town &amp; first beach.</strong> Morning at Banje beach, walk Old Town walls, Marco Polo house, cathedral. Lunch at Filippi. Afternoon at Bilin &Zcaron;al, Lumbarda. <strong>Evening: LD Restaurant</strong> (book well ahead) &mdash; the Michelin-star highlight.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 3</div>
-                        <div class="day-content"><strong>Wine villages &amp; south coast.</strong> Late breakfast at Konoba Belin, Zrnovo. Smokvica &amp; Cara for Po&scaron;ip tasting. Afternoon at Pupnatska Luka beach (arrive after peak crowds). Grilled fish at the beach konoba. Villa evening with island produce.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 4</div>
-                        <div class="day-content"><strong>Mljet National Park.</strong> Catamaran 8:30am. Bike around the salt lakes. Lake boat to the monastery. Swim in Veliko Jezero. Return ~5pm. Light supper. <strong>Best nature day.</strong></div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 5</div>
-                        <div class="day-content"><strong>Pelje&scaron;ac wine day.</strong> 15-min ferry to Orebic. Korta Katarina tasting. Drive to Grgic Vina (walk-ins welcome). Lunch at Saints Hills vineyard. Optional: Edivo underwater winery (book ahead). Return ferry, quiet villa evening.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 6</div>
-                        <div class="day-content"><strong>Lumbarda beaches &amp; Konoba Mate.</strong> Morning at Vela Pr&zcaron;ina (arrive 9am). Grk winery in Lumbarda after the beach (&euro;12&ndash;20 tasting). Afternoon rest. <strong>Evening: Konoba Mate</strong> (booked ahead) &mdash; Michelin Bib Gourmand + Green Star. Don&rsquo;t miss the ravioli.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 7</div>
-                        <div class="day-content"><strong>Hvar or Proizd.</strong> Catamaran to Hvar for the younger group, or taxi boat to Proizd island for crystal-clear swimming and total peace. Farewell sunset drinks. Final simple supper.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 8</div>
-                        <div class="day-content"><strong>Departure.</strong> Allow 5+ hours to Dubrovnik Airport. Buy olive oil &amp; Po&scaron;ip in Kor&ccedil;ula Town before leaving.</div>
-                    </div>
-                </div>
-
             </div>
         </details>
-    </div>
+    </section>
 
-    <!-- ===== #3: ULCINJ ===== -->
-    <div id="ulcinj" class="rec-section">
-        <div class="rec-header">
-            <div class="rec-number">3</div>
-            <div class="rec-title">
-                <div class="country-tag">Montenegro</div>
-                <h3>Ulcinj</h3>
+    <!-- ════════════ #3 ULCINJ ════════════ -->
+    <section class="rec reveal" id="ulcinj">
+        <div class="rec-eyebrow">
+            <div class="rec-rank">03</div>
+            <div class="rec-meta">
+                <div class="label">Montenegro</div>
+                <h2>Ulcinj</h2>
             </div>
         </div>
 
-        <div class="score-grid">
-            <div class="score-item">
-                <div class="label">Beaches</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Food</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Authenticity</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Crowds</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
-            </div>
-            <div class="score-item">
-                <div class="label">Value</div>
-                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
-            </div>
+        <p class="rec-intro">The wildcard. Montenegro&rsquo;s most southerly town, near the Albanian border, with a <strong>completely different character</strong> to the rest of the coast. Over 70% of the population is ethnically Albanian. Ottoman old town on the UNESCO Tentative List. And <strong>Velika Pla&zcaron;a</strong>: a 14km stretch of fine sand &mdash; extraordinary and rare anywhere on the Adriatic. Zero cruise ships, genuinely local food at half the price, and our budget is borderline overkill here.</p>
+
+        <div class="scores">
+            <div class="score"><span class="label">Beaches</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div></div>
+            <div class="score"><span class="label">Food</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip"></div></div></div>
+            <div class="score"><span class="label">Authentic</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div></div>
+            <div class="score"><span class="label">Crowds</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div></div>
+            <div class="score"><span class="label">Value</span><div class="score-bar"><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div><div class="score-pip filled"></div></div></div>
         </div>
 
-        <p>The wildcard. Montenegro&rsquo;s most southerly town, near the Albanian border, with a <strong>completely different character</strong> to the rest of the coast. Strong Ottoman/Albanian cultural influence, a cliff-top old town with genuine history, and &mdash; crucially &mdash; <strong>Velika Pla&zcaron;a</strong>: a 14km stretch of fine sand that is extraordinary and rare on the Adriatic. Zero cruise ships, genuinely local food at half the price of the Budva Riviera, and your &pound;7&ndash;10k budget is borderline overkill here.</p>
-
-        <div class="callout callout-warn">
-            <strong>The caveats:</strong> 1.5 hours from Tivat airport. Infrastructure is rawer &mdash; not polished resort territory. Villa stock is thinner and less well-documented by UK agencies. Very hot in August (35&deg;C+). But if the group wants maximum authenticity, this is it.
+        <div class="callout callout-coral">
+            <strong>The caveats:</strong> 1.5 hours from Tivat airport. Infrastructure is rawer &mdash; this is not polished resort territory. Villa stock is thinner. Very hot in August (35&deg;C+). But if we want maximum authenticity, this is it.
         </div>
 
-        <div class="detail-grid">
-            <div class="detail-item">
-                <h4>Getting There</h4>
+        <div class="info-grid">
+            <div class="info-box">
+                <h4>Getting there</h4>
                 <ul>
                     <li>Fly to Tivat (easyJet/BA direct)</li>
-                    <li>Drive south: ~1.5 hours (72km)</li>
-                    <li>Road is coastal, scenic but slow</li>
-                    <li>Car essential here</li>
+                    <li>Drive south: ~1.5 hours (120km)</li>
+                    <li>Coastal road, scenic but slow</li>
+                    <li>Car is essential here</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Budget Reality</h4>
+            <div class="info-box">
+                <h4>Budget</h4>
                 <ul>
                     <li>&pound;7&ndash;10k is overkill &mdash; exceptional value</li>
                     <li>Fresh fish from &euro;25/kg</li>
@@ -1201,325 +1313,247 @@
                     <li>Could easily spend &pound;5k and live like royalty</li>
                 </ul>
             </div>
-            <div class="detail-item">
+            <div class="info-box">
                 <h4>Beaches</h4>
                 <ul>
                     <li><strong>Velika Pla&zcaron;a</strong> &mdash; 14km fine sand, extraordinary</li>
-                    <li><strong>Valdanos</strong> &mdash; sheltered pebble, emerald water</li>
+                    <li><strong>Valdanos</strong> &mdash; sheltered pebble, olive groves, snorkelling</li>
                     <li><strong>Ada Bojana</strong> &mdash; river island, wild and quiet</li>
-                    <li><strong>Mala Pla&zcaron;a</strong> &mdash; town beach (mixed reviews on cleanliness)</li>
+                    <li><strong>Mala Pla&zcaron;a</strong> &mdash; town beach below the old town walls</li>
                 </ul>
             </div>
-            <div class="detail-item">
-                <h4>Key Restaurants</h4>
+            <div class="info-box">
+                <h4>Key restaurants</h4>
                 <ul>
-                    <li><strong>Dulcinea</strong> &mdash; cliff-top views, consistently praised</li>
-                    <li><strong>Il Galeone</strong> &mdash; chef celebrated on national TV</li>
-                    <li><strong>Teuta</strong> &mdash; traditional Albanian-Montenegrin dishes</li>
-                    <li>Old Town waterfront has several authentic spots</li>
+                    <li><strong>Antigona</strong> &mdash; cliff-top sunset terrace, old town</li>
+                    <li><strong>Mi&scaron;ko</strong> &mdash; legendary fish soup, Ada Bojana</li>
+                    <li><strong>La Guitarra</strong> &mdash; bamije (Albanian veal &amp; okra stew)</li>
+                    <li><strong>Mashtra</strong> &mdash; olive grove terrace above Valdanos</li>
                 </ul>
             </div>
         </div>
 
-        <details class="deep-dive" id="ulcinj-deep">
-            <summary>Full deep-dive: restaurants, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
-            <div class="deep-dive-content" id="ulcinj-deep-content">
+        <!-- DEEP DIVE -->
+        <details class="dive">
+            <summary>Full guide: villas, restaurants, beaches, day trips &amp; sample week</summary>
+            <div class="dive-body">
 
-                <div class="callout callout-warn" style="margin-bottom:1.5rem;">
-                    <strong>Cultural context:</strong> Ulcinj is an Albanian town inside Montenegro &mdash; over 70% of the population is ethnically Albanian. You&rsquo;ll see Albanian signs alongside Montenegrin, hear the call to prayer from mosques, and eat Albanian dishes you won&rsquo;t find elsewhere in Montenegro. The Albanian hospitality code (<em>besa</em>) means locals are unusually warm to visitors. The Old Town (Stari Grad) is on the UNESCO Tentative List.
+                <div class="callout callout-warm">
+                    <strong>Cultural note:</strong> Ulcinj is an Albanian town inside Montenegro. You&rsquo;ll see Albanian signs, hear the call to prayer, and eat Albanian dishes not found elsewhere in Montenegro. The Albanian hospitality code (<em>besa</em>) means locals are unusually warm to visitors.
                 </div>
 
-                <h4>Villa Options</h4>
-
-                <p style="color:var(--muted); font-size:0.9rem; margin-bottom:0.8rem;">Ulcinj has thinner luxury villa stock than Kotor Bay or Croatia. But at &pound;7&ndash;10k/week, you dominate the local market &mdash; properties that would cost 3x this in Dubrovnik.</p>
-
-                <div class="villa-card">
-                    <strong>Dulcinea Dream Villa</strong> &mdash; 6 bed, 4 bath, sleeps 12<br>
-                    Private pool + hot tub, 800m&sup2; property, Mediterranean garden. 3.5km from town centre. Indoor playroom, outdoor playground, full kitchen, AC throughout.<br>
-                    <strong>~&euro;1,100/night off-peak; August estimate &euro;1,400&ndash;1,800/night (~&pound;10&ndash;12k/week)</strong> &mdash; top of/slightly above budget.<br>
-                    <em>montenegrovillas.com</em>
+                <h4>Villa options</h4>
+                <p>Ulcinj has thinner luxury villa stock than Kotor Bay or Croatia. But at our budget, we dominate the local market.</p>
+                <div class="listing">
+                    <div class="listing-name">Dulcinea Dream Villa</div>
+                    <div class="listing-detail">6 bed, 4 bath &bull; Pool + hot tub &bull; 800m&sup2; property, Mediterranean garden &bull; 3.5km from town</div>
+                    <div class="listing-price">~&euro;1,100/night off-peak; August est. &euro;1,400&ndash;1,800/night</div>
+                    <div class="listing-source">montenegrovillas.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Mashtra &mdash; The Olive House</div>
+                    <div class="listing-detail">9-room boutique hotel in ancient olive groves above Valdanos Beach. Pool, sea views. On-site restaurant rated best in the area. Book 3&ndash;4 rooms for the family &mdash; a different format but genuinely special.</div>
+                    <div class="listing-source">mashtra.com</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Airbnb / VRBO pool villas</div>
+                    <div class="listing-detail">Multiple 4&ndash;5 bed properties at &euro;200&ndash;400/night (&pound;1,400&ndash;2,800/week). Significantly under budget &mdash; leaves huge room for dining and experiences.</div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Dobra Voda 7-Bed Beachfront Villa</strong> &mdash; 7 bed, pool, beach access<br>
-                    Located between Bar and Ulcinj (~20 min north). Dobra Voda is a quieter, prettier coastal village. Significantly oversized for 5 guests.<br>
-                    <strong>Contact for pricing</strong><br>
-                    <em>montenegrovillas.com</em>
+                <h4>Restaurant guide</h4>
+                <p><strong>Old Town</strong></p>
+                <div class="listing">
+                    <span class="tag tag-star">Must-visit</span>
+                    <div class="listing-name">Antigona</div>
+                    <div class="listing-detail">Cliffside terrace, panoramic sea views. Famous for sunsets. Fresh daily seafood &mdash; octopus salad, sharing platters. Arrive early in summer, no online booking.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Dulcinea</div>
+                    <div class="listing-detail">Family-run, Old Town hotel setting. Refined Montenegrin specialties, harbour views.</div>
+                </div>
+                <p><strong>Town &amp; waterfront</strong></p>
+                <div class="listing">
+                    <div class="listing-name">La Guitarra</div>
+                    <div class="listing-detail">Signature dish: bamije (veal and okra stew &mdash; genuinely Albanian, won&rsquo;t find it elsewhere in Montenegro). Mediterranean garden. The one to try for the fusion cuisine.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Bazar</div>
+                    <div class="listing-detail">Best value in town. Pasta &euro;4, pizza &euro;5, fish &euro;25/kg. Genuinely local crowd. Not glamorous but authentic.</div>
+                </div>
+                <p><strong>Ada Bojana &amp; Bojana River</strong></p>
+                <div class="listing">
+                    <span class="tag tag-star">Destination restaurant</span>
+                    <div class="listing-name">Mi&scaron;ko</div>
+                    <div class="listing-detail">Oldest fish restaurant on Ada Bojana. Legendary fish soup, octopus carpaccio, black risotto. Wooden cabin with river views. Lobster tank. Worth the trip even from Budva.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Kod Ranka (Ranko&rsquo;s Tavern)</div>
+                    <div class="listing-detail">Stilt house on the opposite bank. Famous for &scaron;kampi na buzaru (shrimps braised in wine and garlic). Access by boat. Extraordinary setting.</div>
+                </div>
+                <p><strong>Valdanos area</strong></p>
+                <div class="listing">
+                    <div class="listing-name">Mashtra Restaurant</div>
+                    <div class="listing-detail">Ancient olive grove terrace above Valdanos inlet. Fresh Adriatic fish, seasonal pasta. The finest setting in the region. Book ahead for August.</div>
+                </div>
+                <p><strong>Dishes to seek out:</strong> bamije (veal &amp; okra), riblja &ccedil;orba (fish stew), &scaron;kampi na buzaru, burek (filo pastry &mdash; get it from Albanian bakeries for breakfast), octopus carpaccio.</p>
+
+                <h4>Beach guide</h4>
+                <div class="listing">
+                    <div class="listing-name">Velika Pla&zcaron;a (Long Beach)</div>
+                    <div class="listing-detail">12&ndash;13km of continuous fine grey sand. Longest on the Adriatic. Extremely shallow for 50&ndash;100m &mdash; ideal for everyone. Northern end is family-friendly; southern end is the kitesurfing zone. The scale means it never feels overcrowded. Mum and Dad can relax on the northern stretch while the rest of us kitesurf at the south end.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Ada Bojana</div>
+                    <div class="listing-detail">1,880m of soft sand on a river island at the Albanian border. Swim in the river (fresh) or the sea (salt). Wooden pile-dwelling houses and fish restaurants right on the water. Horseback riding at sunset on the dunes.</div>
+                </div>
+                <div class="listing">
+                    <div class="listing-name">Valdanos</div>
+                    <div class="listing-detail">800m pebble in a sheltered cove. Surrounded by 100,000+ ancient olive trees, some 2,000 years old. Low crowds, great snorkelling. The only beach with genuine shade. Combine with Mashtra lunch above.</div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Mashtra &mdash; The Olive House</strong> &mdash; 9-room boutique hotel<br>
-                    Not a traditional villa: ancient olive groves above Valdanos Beach. Pool, sea views, on-site restaurant rated best in the area. Book 3&ndash;4 rooms for the family. A different format but genuinely special.<br>
-                    <strong>Seasonal Apr&ndash;Oct. Contact directly.</strong><br>
-                    <em>mashtra.com</em>
+                <h4>The heat</h4>
+                <p>August in Ulcinj: 29&ndash;32&deg;C average, peaks of 35&ndash;38&deg;C. The fix: adopt the local siesta rhythm. Beach 8am&ndash;12pm, villa + AC from 12pm&ndash;5pm, evening activities from 5pm. Dinner at 8&ndash;10pm (normal local hour). <strong>AC in all bedrooms is non-negotiable for Mum and Dad.</strong></p>
+
+                <h4>Day trips</h4>
+                <div class="itin">
+                    <div class="itin-day"><div class="itin-label">Stari Bar</div><div class="itin-content"><strong>30km, ~35 min.</strong> Ruins of a medieval walled city. Open-air museum of remarkable scale &mdash; fortress, cathedral ruins, Ottoman hammam. Plus the 2,000-year-old olive tree. Easy half-day, very low tourist footfall.</div></div>
+                    <div class="itin-day"><div class="itin-label">Skadar</div><div class="itin-content"><strong>45&ndash;60 min to Virpazar.</strong> Largest lake in the Balkans. Boat tours with pelicans, water lilies, island monasteries. Cooler on the water than on shore. Local Vranac red wine at Virpazar.</div></div>
+                    <div class="itin-day"><div class="itin-label">Shkod&euml;r</div><div class="itin-content"><strong>~30km, 45&ndash;60 min with border.</strong> Closest Albanian city. Rozafa Castle, Old Bazaar for coffee and street food. <strong>Check car rental allows Albania</strong> &mdash; some charge &euro;20&ndash;30 supplement, others prohibit it. Most culturally distinctive day trip.</div></div>
                 </div>
 
-                <div class="villa-card">
-                    <strong>Airbnb/VRBO Pool Villas</strong> &mdash; 4&ndash;5 bed options<br>
-                    Multiple properties in the &euro;200&ndash;400/night range (&pound;1,400&ndash;2,800/week). Significantly under budget &mdash; leaving huge room for dining, day trips, and experiences.<br>
-                    <em>Search with 4+ bed + pool filter for August 2026</em>
-                </div>
-
-                <h4>Restaurant Guide</h4>
-
-                <p style="font-style:italic; color:var(--muted); margin-bottom:0.8rem;">Old Town (Stari Grad)</p>
-
-                <div class="restaurant-card">
-                    <strong>Antigona</strong> &mdash; <span class="badge badge-star">Must-visit</span><br>
-                    Cliffside terrace with panoramic sea views. Famous for sunsets and fresh daily seafood &mdash; octopus salad, sharing platters. &ldquo;Unbeatable sunset terrace.&rdquo; Arrive early in summer, no online booking.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Dulcinea</strong> &mdash; Family-run, boutique hotel setting in the Old Town. Refined Montenegrin specialties, harbour views. Balanced menu including Balkan grill and soups. &euro;&euro;&euro;.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Taphana</strong> &mdash; Wood-fired steaks and Adriatic cuisine. Fork-tender fish, beef, and lamb. Old Town. &euro;&euro;+.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Fisherman Hari</strong> &mdash; Cliffside above fishing grounds. Daily catch &mdash; sea bass, eel, bream, shellfish. Unpretentious, genuinely local. &euro;&euro;.
-                </div>
-
-                <p style="font-style:italic; color:var(--muted); margin:1rem 0 0.8rem;">Town centre &amp; waterfront</p>
-
-                <div class="restaurant-card">
-                    <strong>La Guitarra</strong> &mdash; The signature dish: <strong>Bamije</strong> (Ulcinj veal and okra stew &mdash; a genuinely Albanian dish you won&rsquo;t find elsewhere in Montenegro). Mediterranean garden setting. &euro;&euro;.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Bazar</strong> &mdash; Best value in town. Pasta &euro;4, pizza &euro;5, fish &euro;25/kg. Genuinely local crowd. Not glamorous but authentic. &euro;.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Higo</strong> &mdash; Premium steaks including Wagyu/Kobe. Pinji&scaron; pine forest above a cove. Highest-end option in town. For a celebratory dinner. &euro;&euro;&euro;&euro;.
-                </div>
-
-                <p style="font-style:italic; color:var(--muted); margin:1rem 0 0.8rem;">Ada Bojana &amp; Bojana River</p>
-
-                <div class="restaurant-card">
-                    <strong>Mi&scaron;ko</strong> &mdash; <span class="badge badge-star">Destination restaurant</span><br>
-                    Oldest fish restaurant on Ada Bojana. Legendary fish soup (riblja &ccedil;orba), octopus carpaccio, black risotto. Wooden cabin with river views. Lobster tank. Worth the trip even from Budva.
-                </div>
-
-                <div class="restaurant-card">
-                    <strong>Kod Ranka (Ranko&rsquo;s Tavern)</strong> &mdash; Stilt house on the opposite bank of the Bojana River. Famous for &scaron;kampi na buzaru (shrimps braised in wine and garlic). Access by boat. Extraordinary setting.
-                </div>
-
-                <p style="font-style:italic; color:var(--muted); margin:1rem 0 0.8rem;">Valdanos area</p>
-
-                <div class="restaurant-card">
-                    <strong>Mashtra Restaurant</strong> &mdash; At the Olive House. Ancient olive grove terrace with sea views over Valdanos inlet. Fresh Adriatic fish, seasonal pasta, beautifully plated. <strong>Book ahead for August.</strong> The finest setting in the region.
-                </div>
-
-                <p style="color:var(--muted); font-size:0.88rem; margin-top:0.8rem;"><strong>Dishes to seek:</strong> bamije (veal &amp; okra stew), riblja &ccedil;orba (fish stew), &scaron;kampi na buzaru, burek (filo pastry &mdash; best at Albanian bakeries for breakfast), octopus carpaccio, black risotto.</p>
-
-                <h4>Beach Guide</h4>
-
-                <div class="beach-card">
-                    <strong>Velika Pla&zcaron;a (Long Beach)</strong> &mdash; 12&ndash;13km of continuous fine grey sand. The longest stretch on the Adriatic. Extremely shallow for 50&ndash;100m &mdash; ideal for all. Northern section is family-friendly; southern tip is the kitesurfing zone with beach bars and a bohemian crowd. The scale means it never feels overcrowded (150,000 person capacity). Water clarity: 56m visibility. The sand reportedly has therapeutic mineral properties.<br>
-                    <strong>Best for:</strong> Everyone &mdash; parents relax on calm northern stretch, 30-year-olds kitesurf at the south end.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Mala Pla&zcaron;a (Town Beach)</strong> &mdash; 376m crescent of fine sand directly below the Old Town walls. Walking distance from restaurants. Packed in August. Shallow, family-friendly.<br>
-                    <strong>Best for:</strong> Quick morning dips around Old Town exploration.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Ada Bojana</strong> &mdash; 1,880m of soft grey sand on a river island at the Albanian border. Swim in the river (fresh) or the sea (salt). Wooden pile-dwelling houses, fish restaurants right on the river. Horseback riding at sunset on the sand dunes. Moderate crowds.<br>
-                    <strong>Best for:</strong> The couple and brother for the atmosphere; parents for the riverside restaurants.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Valdanos</strong> &mdash; 800m of gravelly pebbles in a sheltered cove. Surrounded by one of the largest ancient olive groves in Montenegro (100,000+ trees, some 2,000 years old). Low crowds, peaceful. Deeper water, great for snorkelling. Mashtra restaurant sits above in the olive groves.<br>
-                    <strong>Best for:</strong> Parents wanting shade and peace; combine with Mashtra lunch.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Crystal Beach</strong> &mdash; Pristine secluded cove. Marine Protected Area. Access by boat or overgrown footpath. No facilities.<br>
-                    <strong>Best for:</strong> The 27 and 30-year-olds looking for adventure.
-                </div>
-
-                <div class="beach-card">
-                    <strong>Liman I &amp; II</strong> &mdash; Small coves directly below the castle walls. Pebble/concrete with ladder access. Swimming under medieval walls. Low crowds. Atmospheric.
-                </div>
-
-                <h4>Day Trips</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Stari Bar</div>
-                        <div class="day-content">
-                            <strong>30km, ~35 min.</strong> Ruins of a medieval walled city &mdash; destroyed in the 1878 war and 1979 earthquake. Open-air museum of remarkable scale. 11th-century fortress, Cathedral ruins, Ottoman hammam, the 2,000+ year old olive tree. Easy half-day, very low tourist footfall. Combine with Bar town for lunch.
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Skadar Lake</div>
-                        <div class="day-content">
-                            <strong>45&ndash;60 min drive to Virpazar.</strong> Largest lake in the Balkans. 2&ndash;4 hour boat tours with pelicans, water lilies, crumbling island monasteries. Temperatures on the water are more bearable than shore. Virpazar has excellent local wine (Crmnica region, Montenegro&rsquo;s best reds).
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Shkod&euml;r</div>
-                        <div class="day-content">
-                            <strong>~30km south, 45&ndash;60 min with border.</strong> Closest Albanian city. Rozafa Castle (dramatic fortress, views into both countries). Old Bazaar for coffee and street food. Mesi Bridge (18th-century Ottoman). <strong>Check car rental allows Albania</strong> &mdash; some prohibit it; others charge &euro;20&ndash;30 supplement. Border queues in August: 20&ndash;40 min. Most culturally distinctive day trip.
-                        </div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Sveti Stefan</div>
-                        <div class="day-content">
-                            <strong>1.5&ndash;2h north.</strong> Montenegro&rsquo;s most photographed view. Combine with Budva Old Town (medieval walls, sunset walk). The contrast with Ulcinj will confirm you made the right choice.
-                        </div>
-                    </div>
-                </div>
-
-                <h4>The Heat Factor</h4>
-
-                <div class="callout callout-warn">
-                    <strong>August in Ulcinj: 29&ndash;32&deg;C average, peaks of 35&ndash;38&deg;C.</strong> UV index 8 (Very High). Ulcinj runs hotter than Kotor Bay due to its southern latitude.<br><br>
-                    <strong>The fix:</strong> Adopt the local siesta rhythm. Beach 8am&ndash;12pm, long lunch + villa + AC from 12pm&ndash;5pm, evening activities from 5pm onwards, dinner at 8&ndash;10pm (normal local hour). Valdanos is the only beach with genuine shade (olive groves). <strong>AC in all bedrooms is non-negotiable for mid-60s parents.</strong>
-                </div>
-
-                <h4>Practical Tips</h4>
-
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <h4>Getting There</h4>
+                <h4>Practical</h4>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Getting there</h4>
                         <ul>
-                            <li>Tivat Airport to Ulcinj: ~120km, 1.5&ndash;2h drive south along the coast</li>
-                            <li>Consider private transfer for arrival (~&euro;80&ndash;120)</li>
-                            <li>Road is paved E65/M2.4, two-lane, scenic but slow in places</li>
-                            <li>August traffic Budva&ndash;Bar can add 15&ndash;30 min</li>
+                            <li>Tivat to Ulcinj: ~120km, 1.5&ndash;2h drive</li>
+                            <li>Consider private transfer (~&euro;80&ndash;120)</li>
+                            <li>Coastal road, paved but two-lane</li>
                         </ul>
                     </div>
-                    <div class="detail-item">
-                        <h4>Money &amp; Language</h4>
+                    <div class="info-box">
+                        <h4>Language</h4>
                         <ul>
-                            <li>Euro (&euro;) &mdash; same as rest of Montenegro</li>
-                            <li>Cards accepted at major restaurants; cash needed for bakeries, market stalls, boat trips</li>
-                            <li>Albanian is the primary spoken language; English is sufficient for tourism</li>
+                            <li>Albanian is the main spoken language</li>
+                            <li>English sufficient for tourism</li>
                             <li>Useful: <em>Faleminderit</em> (thank you), <em>Ju lutem</em> (please)</li>
                         </ul>
                     </div>
                 </div>
 
-                <h4>Sample Week</h4>
-
-                <div class="itinerary">
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 1</div>
-                        <div class="day-content"><strong>Arrival.</strong> Transfer from Tivat (~1h45). Pool through the heat. Evening: Mala Pla&zcaron;a for a sunset swim. Dinner at Bazar for an affordable, authentic first meal &mdash; get the fish by the kilo.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 2</div>
-                        <div class="day-content"><strong>Old Town immersion.</strong> Morning 8&ndash;11am: explore Stari Grad &mdash; ramparts, castle, Corsairs Museum. Albanian burek and coffee from a bakery. Mala Pla&zcaron;a swim. Afternoon siesta. <strong>Evening: Antigona</strong> for sunset on the cliffside terrace.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 3</div>
-                        <div class="day-content"><strong>Velika Pla&zcaron;a + kitesurfing.</strong> Drive to Long Beach by 8am. Parents on the northern family stretch. Couple/brother to the southern kitesurfing zone (Ka&rsquo;banya school, ~&euro;60&ndash;80 intro lesson). Midday retreat to beach club. Siesta. <strong>Evening: La Guitarra</strong> &mdash; order the bamije.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 4</div>
-                        <div class="day-content"><strong>Valdanos + Mashtra.</strong> Morning at Valdanos Beach (olive grove shade, snorkelling). Walk up to <strong>Mashtra restaurant</strong> for a long slow lunch in the ancient olive groves &mdash; the meal of the week. Pool afternoon. Light supper at the villa.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 5</div>
-                        <div class="day-content"><strong>Stari Bar + Lake Skadar.</strong> Leave 8am. 2 hours exploring the medieval ruins and the 2,000-year-old olive tree. Drive to Virpazar for a boat trip on the lake (2&ndash;3h). Lunch in Virpazar, try local Vranac red wine. Back mid-afternoon. <strong>Evening: Mi&scaron;ko on Ada Bojana</strong> (book ahead).</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 6</div>
-                        <div class="day-content"><strong>Shkod&euml;r, Albania.</strong> Leave 8am, 45&ndash;60 min to the border. Rozafa Castle, Old Bazaar for coffee and street food, Mesi Bridge. Back by 2pm. Pool afternoon. <strong>Evening: Dulcinea</strong> for the best formal dinner of the week.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 7</div>
-                        <div class="day-content"><strong>Ada Bojana slow day.</strong> Walk the island, swim in river-meets-sea. Optional: horseback riding at sunset on the sand dunes (~&euro;25&ndash;40/hr). <strong>Farewell dinner: Kod Ranka</strong> &mdash; stilt house on the river, &scaron;kampi na buzaru, sunset over the Albanian mountains.</div>
-                    </div>
-                    <div class="itinerary-day">
-                        <div class="day-label">Day 8</div>
-                        <div class="day-content"><strong>Departure.</strong> Allow 2+ hours to Tivat Airport.</div>
-                    </div>
+                <h4>Sample week</h4>
+                <div class="itin">
+                    <div class="itin-day"><div class="itin-label">Day 1</div><div class="itin-content"><strong>Arrive.</strong> Transfer from Tivat (~1h45). Pool. Sunset swim at Mala Pla&zcaron;a. Dinner at Bazar &mdash; fish by the kilo, no fuss.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 2</div><div class="itin-content"><strong>Old Town.</strong> Morning 8&ndash;11am: Stari Grad ramparts, castle, Corsairs Museum. Albanian burek for breakfast. Swim below the walls. Siesta. <strong>Evening: Antigona</strong> for sunset.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 3</div><div class="itin-content"><strong>Long Beach + kites.</strong> Velika Pla&zcaron;a by 8am. Parents on the northern stretch, younger group at the kitesurfing school (~&euro;60&ndash;80 intro lesson). Siesta. <strong>Evening: La Guitarra</strong> &mdash; order the bamije.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 4</div><div class="itin-content"><strong>Valdanos + Mashtra.</strong> Morning snorkelling at Valdanos. Walk up to <strong>Mashtra restaurant</strong> for a long olive-grove lunch &mdash; the meal of the week. Pool afternoon.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 5</div><div class="itin-content"><strong>Stari Bar + Skadar.</strong> Ruins and the 2,000-year-old olive tree (morning). Drive to Virpazar for a lake boat trip. Local Vranac wine. <strong>Evening: Mi&scaron;ko</strong> on Ada Bojana.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 6</div><div class="itin-content"><strong>Shkod&euml;r, Albania.</strong> Leave 8am. Rozafa Castle, Old Bazaar, Mesi Bridge. Back by 2pm. Pool. <strong>Evening: Dulcinea</strong> for the formal dinner of the week.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 7</div><div class="itin-content"><strong>Ada Bojana.</strong> Walk the island, swim in river-meets-sea. Optional: horseback riding at sunset (~&euro;25&ndash;40/hr). <strong>Farewell: Kod Ranka</strong> &mdash; stilt house on the river, &scaron;kampi na buzaru, sunset over Albania.</div></div>
+                    <div class="itin-day"><div class="itin-label">Day 8</div><div class="itin-content"><strong>Depart.</strong> Allow 2+ hours to Tivat Airport.</div></div>
                 </div>
-
             </div>
         </details>
-    </div>
+    </section>
 
-    <!-- ===== COMPARISON ===== -->
-    <h2>Montenegro vs Croatia</h2>
+    <!-- ════════════ COMPARISON ════════════ -->
+    <section class="section reveal">
+        <h2>Montenegro vs Croatia</h2>
+        <p class="section-lead">Both work. Here&rsquo;s how they compare for what we&rsquo;re after.</p>
 
-    <table class="comparison-table">
-        <thead>
-            <tr><th></th><th>Montenegro</th><th>Croatia</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Value</strong></td>
-                <td>23% cheaper. Budget goes much further.</td>
-                <td>Pricier &mdash; &pound;7&ndash;10k is the ceiling, not the floor.</td>
-            </tr>
-            <tr>
-                <td><strong>Crowds</strong></td>
-                <td>2.6M tourists/year total.</td>
-                <td>21M tourists/year. Heavy saturation.</td>
-            </tr>
-            <tr>
-                <td><strong>Flights</strong></td>
-                <td>easyJet/BA direct to Tivat.</td>
-                <td>Abundant to Split &amp; Dubrovnik.</td>
-            </tr>
-            <tr>
-                <td><strong>Food</strong></td>
-                <td>Excellent seafood, less wine culture.</td>
-                <td>Stronger wine scene, especially Kor&ccedil;ula.</td>
-            </tr>
-            <tr>
-                <td><strong>Beaches</strong></td>
-                <td>Ulcinj has rare sand; rest is rocky/pebble.</td>
-                <td>Mostly pebble, some sand on Bra&ccedil;.</td>
-            </tr>
-            <tr>
-                <td><strong>Island feel</strong></td>
-                <td>No real island option.</td>
-                <td>True archipelago experience.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- ===== PRACTICAL ===== -->
-    <h2>Practical Notes</h2>
-
-    <div class="practical-grid">
-        <div class="practical-item">
-            <h4>Book Early</h4>
-            <p>August peak = quality 5-bed villas with pools book 4&ndash;6 months ahead. Don&rsquo;t wait past February.</p>
+        <div class="compare">
+            <div class="compare-col">
+                <h3>Montenegro</h3>
+                <div class="compare-row"><div class="compare-key">Value</div><div class="compare-val">23% cheaper. Our budget goes much further.</div></div>
+                <div class="compare-row"><div class="compare-key">Crowds</div><div class="compare-val">2.6M tourists/year total.</div></div>
+                <div class="compare-row"><div class="compare-key">Flights</div><div class="compare-val">easyJet/BA direct to Tivat.</div></div>
+                <div class="compare-row"><div class="compare-key">Food</div><div class="compare-val">Excellent seafood. Less wine culture.</div></div>
+                <div class="compare-row"><div class="compare-key">Beaches</div><div class="compare-val">Ulcinj has rare sand. Rest is rocky/pebble.</div></div>
+                <div class="compare-row"><div class="compare-key">Feel</div><div class="compare-val">Coastal mainland. No island option.</div></div>
+            </div>
+            <div class="compare-col">
+                <h3>Croatia</h3>
+                <div class="compare-row"><div class="compare-key">Value</div><div class="compare-val">Pricier. &pound;7&ndash;10k is ceiling, not floor.</div></div>
+                <div class="compare-row"><div class="compare-key">Crowds</div><div class="compare-val">21M tourists/year. Heavy saturation.</div></div>
+                <div class="compare-row"><div class="compare-key">Flights</div><div class="compare-val">Abundant to Split &amp; Dubrovnik.</div></div>
+                <div class="compare-row"><div class="compare-key">Food</div><div class="compare-val">Stronger wine scene. Kor&ccedil;ula especially.</div></div>
+                <div class="compare-row"><div class="compare-key">Beaches</div><div class="compare-val">Mostly pebble. Some sand on Bra&ccedil;.</div></div>
+                <div class="compare-row"><div class="compare-key">Feel</div><div class="compare-val">True archipelago experience.</div></div>
+            </div>
         </div>
-        <div class="practical-item">
-            <h4>Car Rental</h4>
-            <p>Essential at all three recommended locations. Book with the villa, not at the airport desk.</p>
-        </div>
-        <div class="practical-item">
-            <h4>Booking Platforms</h4>
-            <p>montenegrovillas.com (local specialist), oliverstravels.com, CV Villas, croatianvillaholidays.com</p>
-        </div>
-        <div class="practical-item">
-            <h4>Flights</h4>
-            <p>easyJet to Tivat (Montenegro), Split (Bra&ccedil;), Dubrovnik (Kor&ccedil;ula) &mdash; all direct from London.</p>
-        </div>
-    </div>
+    </section>
 
-    <!-- ===== BOTTOM LINE ===== -->
-    <div class="callout callout-good" style="margin-top: 2rem;">
-        <h3 style="margin-top: 0;">The Bottom Line</h3>
-        <p>Sveti Stefan / Przno is the answer. It&rsquo;s the rare spot that satisfies everyone in a mixed-age group: beautiful beaches the parents can walk to, excellent local restaurants, authentic fishing-village character, no cruise ships, no oligarch glitz, and the budget stretches 20&ndash;25% further than Croatia. Kor&ccedil;ula is the backup if the group wants a Croatian island with wine culture. Skip Kotor, Budva, Tivat, and Krk entirely in August.</p>
-    </div>
+    <!-- ════════════ PRACTICAL ════════════ -->
+    <section class="section reveal">
+        <h2>Practical notes</h2>
+
+        <div class="practical">
+            <div class="practical-item">
+                <h4>Book early</h4>
+                <p>August peak means quality 5-bed villas book 4&ndash;6 months ahead. Don&rsquo;t wait past February.</p>
+            </div>
+            <div class="practical-item">
+                <h4>Car rental</h4>
+                <p>Essential at all three picks. Book with the villa, not at the airport desk.</p>
+            </div>
+            <div class="practical-item">
+                <h4>Where to book</h4>
+                <p>montenegrovillas.com, oliverstravels.com, CV Villas, croatianvillaholidays.com</p>
+            </div>
+            <div class="practical-item">
+                <h4>Flights</h4>
+                <p>easyJet to Tivat (Montenegro) or Split/Dubrovnik (Croatia). All direct from London.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════ BOTTOM LINE ════════════ -->
+    <section class="section reveal">
+        <div class="bottom-line">
+            <h3>So what do we think?</h3>
+            <p>Sveti Stefan / Przno is our recommendation. Beautiful beaches we can walk to, excellent local restaurants, authentic fishing-village character, no cruise ships, no glitz, and the budget stretches 20&ndash;25% further than Croatia. Kor&ccedil;ula is the pick if we want a Croatian island with wine culture. Ulcinj is the adventure option. All three would be a brilliant week.</p>
+        </div>
+    </section>
 
 </div>
 
 <footer>
-    Researched May 2026. Based on 2024&ndash;2026 travel reports, villa listings, cruise schedules, and traveller forums.<br>
-    Prices and availability should be verified at time of booking.
+    <div class="container">
+        Researched May 2026 &bull; Based on 2024&ndash;2026 travel reports, villa listings, cruise schedules &amp; traveller forums<br>
+        Prices and availability should be verified at time of booking
+    </div>
 </footer>
 
+<script>
+    // Scroll progress
+    const bar = document.getElementById('scrollProgress');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const h = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Scroll reveal
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+</script>
 </body>
 </html>
