@@ -288,6 +288,23 @@ footer { padding: var(--space-2xl) 0; text-align: center; font-size: 0.78rem; co
 .rec-facts a { color: var(--ink-secondary); text-decoration-color: oklch(58% 0.14 45 / 0.3); }
 .rec-facts a:hover { color: var(--terracotta); }
 
+/* ── MOBILE POLISH ── */
+@media (max-width: 600px) {
+    .section { padding: var(--space-xl) 0; }
+    .rec { padding: var(--space-xl) 0; }
+    .rec + .rec { padding-top: var(--space-lg); }
+    .rec-rank { font-size: 2.5rem; }
+    .rec-intro { font-size: 0.95rem; margin-bottom: var(--space-lg); }
+    .callout { padding: var(--space-md); font-size: 0.88rem; }
+    .guide-link { padding: var(--space-md) var(--space-lg); min-height: 52px; }
+    .listing { padding: var(--space-md); }
+    .info-box { padding: var(--space-md); }
+    .itin-day { padding: var(--space-sm) 0; }
+    .bottom-line { padding: var(--space-lg); }
+    h2 { font-size: 1.5rem; }
+    .compare { gap: var(--space-lg); }
+}
+
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
