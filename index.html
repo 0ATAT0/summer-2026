@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montenegro & Croatia — Summer 2026</title>
+    <style>
+        :root {
+            --ink: #1a1a2e;
+            --paper: #faf9f6;
+            --accent: #2d6a9f;
+            --accent-light: #e8f0f8;
+            --warm: #c4956a;
+            --warm-light: #fdf3eb;
+            --red: #b44;
+            --red-light: #fceaea;
+            --green: #3a7d5c;
+            --green-light: #eaf5ef;
+            --border: #e0ddd8;
+            --muted: #6b6b6b;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--ink);
+            background: var(--paper);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #4a9ebb 100%);
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--paper);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+        .hero .meta {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .hero .meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .nav-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+        }
+        .nav-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--ink);
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
+        }
+        .nav-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .nav-card .rank {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .nav-card h3 {
+            margin: 0.5rem 0 0.3rem;
+            font-size: 1.1rem;
+        }
+        .nav-card .country {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+        .nav-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 3rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0 0.8rem;
+        }
+
+        .verdict-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .verdict-table th {
+            text-align: left;
+            padding: 0.8rem 1rem;
+            background: var(--accent-light);
+            border-bottom: 2px solid var(--accent);
+            font-weight: 600;
+        }
+        .verdict-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .verdict-table tr:hover {
+            background: #fafafa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: system-ui, sans-serif;
+            white-space: nowrap;
+        }
+        .badge-yes { background: var(--green-light); color: var(--green); }
+        .badge-no { background: var(--red-light); color: var(--red); }
+        .badge-maybe { background: var(--warm-light); color: #8a6030; }
+        .badge-star { background: #fef3c7; color: #92400e; }
+
+        .rec-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        .rec-section.top-pick {
+            border-color: var(--accent);
+            border-width: 2px;
+        }
+        .rec-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .rec-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            min-width: 2.5rem;
+        }
+        .rec-title h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        .rec-title .country-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        .score-item {
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: var(--paper);
+        }
+        .score-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            font-family: system-ui, sans-serif;
+        }
+        .score-item .dots {
+            font-size: 1.1rem;
+            margin: 0.3rem 0;
+            letter-spacing: 0.15em;
+        }
+        .dot-full { color: var(--accent); }
+        .dot-empty { color: #ddd; }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 600px) {
+            .detail-grid { grid-template-columns: 1fr; }
+        }
+        .detail-item {
+            padding: 1rem;
+            background: var(--paper);
+            border-radius: 6px;
+        }
+        .detail-item h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            font-family: system-ui, sans-serif;
+        }
+        .detail-item p, .detail-item ul {
+            font-size: 0.92rem;
+        }
+        .detail-item ul {
+            padding-left: 1.2rem;
+        }
+        .detail-item li {
+            margin-bottom: 0.3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .comparison-table th {
+            text-align: left;
+            padding: 0.7rem 0.8rem;
+            background: var(--paper);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            font-family: system-ui, sans-serif;
+        }
+        .comparison-table td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        .callout {
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .callout-info {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+        }
+        .callout-warn {
+            background: var(--warm-light);
+            border-left: 4px solid var(--warm);
+        }
+        .callout-good {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+        }
+
+        .practical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .practical-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+        .practical-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .practical-item p {
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .deep-dive {
+            margin-top: 1rem;
+        }
+        .deep-dive summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        .deep-dive summary:hover {
+            text-decoration: underline;
+        }
+        .deep-dive-content {
+            padding: 1rem 0;
+        }
+        .deep-dive-content h4 {
+            font-size: 1rem;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--ink);
+        }
+        .deep-dive-content h4:first-child {
+            margin-top: 0;
+        }
+        .deep-dive-content ul {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .deep-dive-content li {
+            margin-bottom: 0.4rem;
+            font-size: 0.92rem;
+        }
+        .deep-dive-content p {
+            font-size: 0.92rem;
+            margin: 0.5rem 0;
+        }
+        .deep-dive-content .restaurant-card,
+        .deep-dive-content .beach-card,
+        .deep-dive-content .villa-card {
+            background: var(--paper);
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .deep-dive-content .restaurant-card strong,
+        .deep-dive-content .beach-card strong,
+        .deep-dive-content .villa-card strong {
+            color: var(--accent);
+        }
+
+        .itinerary {
+            margin: 1rem 0;
+        }
+        .itinerary-day {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .itinerary-day:last-child { border-bottom: none; }
+        .day-label {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: system-ui, sans-serif;
+            padding-top: 0.1rem;
+        }
+        .day-content {
+            font-size: 0.92rem;
+        }
+        .day-content strong { font-weight: 600; }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        .stars { color: #d4a017; letter-spacing: 0.1em; }
+
+        @media (max-width: 600px) {
+            .hero { padding: 3rem 1.5rem 2.5rem; }
+            .container { padding: 1.5rem 1rem; }
+            .rec-section { padding: 1.5rem; }
+            .hero .meta { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Montenegro & Croatia</h1>
+    <div class="subtitle">Villa Holiday Research &mdash; Summer 2026</div>
+    <div class="meta">
+        <span>5 adults</span>
+        <span>August 2026</span>
+        <span>&pound;7&ndash;10k / week</span>
+        <span>Beaches &amp; Food</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <p style="font-size: 1.05rem; margin: 1.5rem 0 0.5rem;">Your mum suggested nine locations across Montenegro and Croatia. We researched every one against what the group actually wants: <strong>authentic coastal character, good beaches, great restaurants within 30 minutes, no cruise-ship crowds, and no oligarch glitz</strong>.</p>
+
+    <p style="color: var(--muted);">Three locations survived. Here they are, ranked.</p>
+
+    <div class="nav-cards">
+        <a href="#sveti-stefan" class="nav-card">
+            <div class="rank">1</div>
+            <div class="country">Montenegro</div>
+            <h3>Sveti Stefan / Przno</h3>
+            <p>Authentic fishing village, 4 beaches, superb food. Top pick.</p>
+        </a>
+        <a href="#korcula" class="nav-card">
+            <div class="rank">2</div>
+            <div class="country">Croatia</div>
+            <h3>Korcula Island</h3>
+            <p>Wine culture, Michelin dining, island life. Best Croatian option.</p>
+        </a>
+        <a href="#ulcinj" class="nav-card">
+            <div class="rank">3</div>
+            <div class="country">Montenegro</div>
+            <h3>Ulcinj</h3>
+            <p>14km sandy beach, Ottoman old town, unbeatable value. The wildcard.</p>
+        </a>
+    </div>
+
+    <!-- ===== VERDICTS TABLE ===== -->
+    <h2>Every Location &mdash; At a Glance</h2>
+
+    <h3>Montenegro</h3>
+    <table class="verdict-table">
+        <thead>
+            <tr><th>Location</th><th>Verdict</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Perast</strong></td>
+                <td><span class="badge badge-maybe">Day trip</span></td>
+                <td>Beautiful Venetian village, excellent evening restaurants. But <strong>no beaches</strong> and almost no villa stock. Visit for dinner from a base elsewhere.</td>
+            </tr>
+            <tr>
+                <td><strong>Kotor</strong></td>
+                <td><span class="badge badge-no">Avoid</span></td>
+                <td>4&ndash;6 cruise ships daily in August. 15,000+ day-trippers into a town of 23,000. Local restaurant owners close up because &ldquo;the season kills the magic.&rdquo;</td>
+            </tr>
+            <tr>
+                <td><strong>Lu&scaron;tica Bay</strong></td>
+                <td><span class="badge badge-no">Wrong fit</span></td>
+                <td>Good news: it&rsquo;s <em>not</em> the cruise ship dock (that&rsquo;s Kotor). Bad news: purpose-built luxury resort, partly under construction. One reviewer: &ldquo;a soulless ghost town.&rdquo; No authentic village life.</td>
+            </tr>
+            <tr>
+                <td><strong>Budva</strong></td>
+                <td><span class="badge badge-no">Avoid</span></td>
+                <td>Montenegro&rsquo;s party capital. 45% of all Montenegrin tourism. Packed sun-loungers, loud music, Eastern European party crowd. Old town described as &ldquo;tacky.&rdquo;</td>
+            </tr>
+            <tr>
+                <td><strong>Sveti Stefan</strong></td>
+                <td><span class="badge badge-yes">Top pick</span></td>
+                <td>Przno fishing village base. 4 beaches, superb food, no cruise ships, authentic character. Budget buys top-tier here.</td>
+            </tr>
+            <tr>
+                <td><strong>Ulcinj</strong></td>
+                <td><span class="badge badge-yes">Recommended</span></td>
+                <td>Most authentic spot on the list. Ottoman old town, 14km sandy beach, excellent cheap seafood. Rawer infrastructure, further from airport.</td>
+            </tr>
+            <tr>
+                <td><strong>Tivat</strong></td>
+                <td><span class="badge badge-no">Fails brief</span></td>
+                <td>Porto Montenegro marina = documented oligarch yacht parking. Russian superyachts reported here even during sanctions. Town behind the marina is fine, but Porto Montenegro is unavoidable.</td>
+            </tr>
+            <tr>
+                <td><strong>Kola&scaron;in</strong></td>
+                <td><span class="badge badge-maybe">Day trip</span></td>
+                <td>Beautiful mountains, genuinely peaceful. But not coastal. Worth a one-day excursion &mdash; Biogradska Gora is one of Europe&rsquo;s last virgin forests.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Croatian Islands</h3>
+    <table class="verdict-table">
+        <thead>
+            <tr><th>Island</th><th>Verdict</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Kor&ccedil;ula</strong></td>
+                <td><span class="badge badge-yes">Best island</span></td>
+                <td>Genuine food &amp; wine culture (Michelin-starred LD, family konobas since 1974), indigenous grapes. Manageable crowds if based outside town.</td>
+            </tr>
+            <tr>
+                <td><strong>Bra&ccedil;</strong></td>
+                <td><span class="badge badge-maybe">Good backup</span></td>
+                <td>Best logistics (50-min ferry from Split). Deepest villa stock. But Zlatni Rat beach is a zoo in August. Base near Milna, not Bol.</td>
+            </tr>
+            <tr>
+                <td><strong>Lo&scaron;inj</strong></td>
+                <td><span class="badge badge-maybe">Quiet but awkward</span></td>
+                <td>Least crowded of all four. But: no commercial airport, 3h45 bus from Rijeka, thinner villa stock, food scene drifts Japanese/Greek rather than local.</td>
+            </tr>
+            <tr>
+                <td><strong>Krk</strong></td>
+                <td><span class="badge badge-no">Eliminate</span></td>
+                <td>Bridge to mainland = car-crowded mass tourism. &ldquo;Insanely touristy&rdquo; in August. Wrong crowd entirely.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ===== TOP PICK: SVETI STEFAN ===== -->
+    <div id="sveti-stefan" class="rec-section top-pick">
+        <div class="rec-header">
+            <div class="rec-number">1</div>
+            <div class="rec-title">
+                <div class="country-tag">Montenegro</div>
+                <h3>Sveti Stefan / Przno</h3>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-item">
+                <div class="label">Beaches</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Food</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Authenticity</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Crowds</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Value</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+        </div>
+
+        <p>The fishing village of <strong>Przno</strong>, ten minutes north of Budva but a world apart, ticks every box. Fishermen still work from the beach in the morning. Four distinct beaches are within walking distance. The restaurant scene &mdash; anchored by Drago (est. 1967) &mdash; is genuinely excellent. Zero cruise ships. And your &pound;7&ndash;10k budget buys you the top tier of Montenegrin villa stock, because Montenegro is <strong>23% cheaper</strong> than Croatia.</p>
+
+        <div class="callout callout-good">
+            <strong>Glitz check:</strong> The Aman resort on Sveti Stefan island is ultra-luxury but discreetly so &mdash; invisible if you&rsquo;re not a guest. The public beach flanking the causeway was open and free as of 2024. The surrounding area is authentic fishing village, not oligarch territory.
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-item">
+                <h4>Getting There</h4>
+                <ul>
+                    <li>easyJet direct from Gatwick/Luton to Tivat</li>
+                    <li>Flight: ~2h 45min</li>
+                    <li>Transfer: ~60 min by car</li>
+                    <li>BA also flies Heathrow&ndash;Tivat 3x/week</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Budget Reality</h4>
+                <ul>
+                    <li>5-bed villa with heated pool &amp; sea views: confirmed ~&pound;5,900/wk</li>
+                    <li>&pound;7&ndash;10k = top 10&ndash;15% of all MNE rental stock</li>
+                    <li>Montenegro 23% cheaper than Croatia overall</li>
+                    <li>Restaurant dinners roughly half Croatian prices</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Beaches</h4>
+                <ul>
+                    <li><strong>Sveti Stefan Beach</strong> &mdash; pink sand crescent</li>
+                    <li><strong>Queen&rsquo;s Beach</strong> &mdash; sheltered cove, cypress trees</li>
+                    <li><strong>Milo&ccedil;er Beach</strong> &mdash; quieter, tree-lined</li>
+                    <li><strong>Przno Beach</strong> &mdash; village beach, restaurants above</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Key Restaurants</h4>
+                <ul>
+                    <li><strong>Drago</strong> (Przno) &mdash; since 1967, local institution</li>
+                    <li><strong>Femelja Kentera</strong> &mdash; terraced hillside, island views</li>
+                    <li><strong>&Ccedil;atovi&cacute;a Mlini</strong> (30 min) &mdash; rated Montenegro&rsquo;s best</li>
+                    <li><strong>Hotel Conte</strong> (Perast) &mdash; benchmark bay seafood</li>
+                </ul>
+            </div>
+        </div>
+
+        <details class="deep-dive" id="sveti-stefan-deep">
+            <summary>Full deep-dive: restaurants, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
+            <div class="deep-dive-content" id="sveti-stefan-deep-content">
+                <p><em>Loading detailed research...</em></p>
+            </div>
+        </details>
+    </div>
+
+    <!-- ===== #2: KORCULA ===== -->
+    <div id="korcula" class="rec-section">
+        <div class="rec-header">
+            <div class="rec-number">2</div>
+            <div class="rec-title">
+                <div class="country-tag">Croatia</div>
+                <h3>Kor&ccedil;ula Island</h3>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-item">
+                <div class="label">Beaches</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Food &amp; Wine</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Authenticity</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Crowds</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Value</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;</span><span class="dot-empty">&bull;&bull;</span></div>
+            </div>
+        </div>
+
+        <p>If the group specifically wants an <strong>island holiday</strong> with wine culture, Kor&ccedil;ula is the answer. The island produces indigenous grapes you won&rsquo;t find anywhere else &mdash; Grk (almost unique to Lumbarda), Po&scaron;ip, and Plavac Mali. The food scene runs from Michelin-starred <strong>LD Restaurant</strong> to family konobas with tables under fig trees. Crowds are real in August but manageable if you&rsquo;re villa-based outside the old town, visiting in the evening after cruise boats leave.</p>
+
+        <div class="callout callout-info">
+            <strong>Croatia costs more.</strong> Your &pound;7&ndash;10k budget is realistic but at the ceiling for a 5-bed pool villa in August. Croatia has seen ~50% price inflation over three years and is now the second most expensive Mediterranean destination after France.
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-item">
+                <h4>Getting There</h4>
+                <ul>
+                    <li>Fly to Split or Dubrovnik (both very well served)</li>
+                    <li>Split route: drive to Orebic, 15-min car ferry to Kor&ccedil;ula</li>
+                    <li>~2&ndash;2.5h total from Split Airport</li>
+                    <li>Dubrovnik route: ~2.5h via Pelje&scaron;ac</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Budget Reality</h4>
+                <ul>
+                    <li>&pound;7&ndash;10k gets a quality 5&ndash;6 bed pool villa</li>
+                    <li>Not enormous choice &mdash; book early</li>
+                    <li>Dining: &euro;80+ for two at upscale spots</li>
+                    <li>Croatia 23% pricier than Montenegro</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Beaches</h4>
+                <ul>
+                    <li><strong>Pupnatska Luka</strong> &mdash; white pebble, turquoise water, beach bar</li>
+                    <li><strong>Vela Pr&zcaron;ina</strong> (Lumbarda) &mdash; sandy, family-friendly</li>
+                    <li><strong>Bilin &Zcaron;al</strong> (Lumbarda) &mdash; sandy, shallow</li>
+                    <li><strong>Ba&ccedil;va</strong> &mdash; secluded cliff-backed cove</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Key Restaurants</h4>
+                <ul>
+                    <li><strong>LD Restaurant</strong> &mdash; Michelin-starred</li>
+                    <li><strong>Konoba Adio Mare</strong> &mdash; same family since 1974</li>
+                    <li><strong>Konoba Mate</strong> (Pupnat) &mdash; fig trees, family produce</li>
+                    <li>Wine tours: Grk &amp; Po&scaron;ip in Smokvica &amp; Cara</li>
+                </ul>
+            </div>
+        </div>
+
+        <details class="deep-dive" id="korcula-deep">
+            <summary>Full deep-dive: restaurants, wines, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
+            <div class="deep-dive-content" id="korcula-deep-content">
+                <p><em>Loading detailed research...</em></p>
+            </div>
+        </details>
+    </div>
+
+    <!-- ===== #3: ULCINJ ===== -->
+    <div id="ulcinj" class="rec-section">
+        <div class="rec-header">
+            <div class="rec-number">3</div>
+            <div class="rec-title">
+                <div class="country-tag">Montenegro</div>
+                <h3>Ulcinj</h3>
+            </div>
+        </div>
+
+        <div class="score-grid">
+            <div class="score-item">
+                <div class="label">Beaches</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Food</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;</span><span class="dot-empty">&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Authenticity</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Crowds</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+            <div class="score-item">
+                <div class="label">Value</div>
+                <div class="dots"><span class="dot-full">&bull;&bull;&bull;&bull;&bull;</span></div>
+            </div>
+        </div>
+
+        <p>The wildcard. Montenegro&rsquo;s most southerly town, near the Albanian border, with a <strong>completely different character</strong> to the rest of the coast. Strong Ottoman/Albanian cultural influence, a cliff-top old town with genuine history, and &mdash; crucially &mdash; <strong>Velika Pla&zcaron;a</strong>: a 14km stretch of fine sand that is extraordinary and rare on the Adriatic. Zero cruise ships, genuinely local food at half the price of the Budva Riviera, and your &pound;7&ndash;10k budget is borderline overkill here.</p>
+
+        <div class="callout callout-warn">
+            <strong>The caveats:</strong> 1.5 hours from Tivat airport. Infrastructure is rawer &mdash; not polished resort territory. Villa stock is thinner and less well-documented by UK agencies. Very hot in August (35&deg;C+). But if the group wants maximum authenticity, this is it.
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-item">
+                <h4>Getting There</h4>
+                <ul>
+                    <li>Fly to Tivat (easyJet/BA direct)</li>
+                    <li>Drive south: ~1.5 hours (72km)</li>
+                    <li>Road is coastal, scenic but slow</li>
+                    <li>Car essential here</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Budget Reality</h4>
+                <ul>
+                    <li>&pound;7&ndash;10k is overkill &mdash; exceptional value</li>
+                    <li>Fresh fish from &euro;25/kg</li>
+                    <li>Restaurant dinners very affordable</li>
+                    <li>Could easily spend &pound;5k and live like royalty</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Beaches</h4>
+                <ul>
+                    <li><strong>Velika Pla&zcaron;a</strong> &mdash; 14km fine sand, extraordinary</li>
+                    <li><strong>Valdanos</strong> &mdash; sheltered pebble, emerald water</li>
+                    <li><strong>Ada Bojana</strong> &mdash; river island, wild and quiet</li>
+                    <li><strong>Mala Pla&zcaron;a</strong> &mdash; town beach (mixed reviews on cleanliness)</li>
+                </ul>
+            </div>
+            <div class="detail-item">
+                <h4>Key Restaurants</h4>
+                <ul>
+                    <li><strong>Dulcinea</strong> &mdash; cliff-top views, consistently praised</li>
+                    <li><strong>Il Galeone</strong> &mdash; chef celebrated on national TV</li>
+                    <li><strong>Teuta</strong> &mdash; traditional Albanian-Montenegrin dishes</li>
+                    <li>Old Town waterfront has several authentic spots</li>
+                </ul>
+            </div>
+        </div>
+
+        <details class="deep-dive" id="ulcinj-deep">
+            <summary>Full deep-dive: restaurants, beaches, villas, day trips &amp; sample itinerary &rarr;</summary>
+            <div class="deep-dive-content" id="ulcinj-deep-content">
+                <p><em>Loading detailed research...</em></p>
+            </div>
+        </details>
+    </div>
+
+    <!-- ===== COMPARISON ===== -->
+    <h2>Montenegro vs Croatia</h2>
+
+    <table class="comparison-table">
+        <thead>
+            <tr><th></th><th>Montenegro</th><th>Croatia</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Value</strong></td>
+                <td>23% cheaper. Budget goes much further.</td>
+                <td>Pricier &mdash; &pound;7&ndash;10k is the ceiling, not the floor.</td>
+            </tr>
+            <tr>
+                <td><strong>Crowds</strong></td>
+                <td>2.6M tourists/year total.</td>
+                <td>21M tourists/year. Heavy saturation.</td>
+            </tr>
+            <tr>
+                <td><strong>Flights</strong></td>
+                <td>easyJet/BA direct to Tivat.</td>
+                <td>Abundant to Split &amp; Dubrovnik.</td>
+            </tr>
+            <tr>
+                <td><strong>Food</strong></td>
+                <td>Excellent seafood, less wine culture.</td>
+                <td>Stronger wine scene, especially Kor&ccedil;ula.</td>
+            </tr>
+            <tr>
+                <td><strong>Beaches</strong></td>
+                <td>Ulcinj has rare sand; rest is rocky/pebble.</td>
+                <td>Mostly pebble, some sand on Bra&ccedil;.</td>
+            </tr>
+            <tr>
+                <td><strong>Island feel</strong></td>
+                <td>No real island option.</td>
+                <td>True archipelago experience.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ===== PRACTICAL ===== -->
+    <h2>Practical Notes</h2>
+
+    <div class="practical-grid">
+        <div class="practical-item">
+            <h4>Book Early</h4>
+            <p>August peak = quality 5-bed villas with pools book 4&ndash;6 months ahead. Don&rsquo;t wait past February.</p>
+        </div>
+        <div class="practical-item">
+            <h4>Car Rental</h4>
+            <p>Essential at all three recommended locations. Book with the villa, not at the airport desk.</p>
+        </div>
+        <div class="practical-item">
+            <h4>Booking Platforms</h4>
+            <p>montenegrovillas.com (local specialist), oliverstravels.com, CV Villas, croatianvillaholidays.com</p>
+        </div>
+        <div class="practical-item">
+            <h4>Flights</h4>
+            <p>easyJet to Tivat (Montenegro), Split (Bra&ccedil;), Dubrovnik (Kor&ccedil;ula) &mdash; all direct from London.</p>
+        </div>
+    </div>
+
+    <!-- ===== BOTTOM LINE ===== -->
+    <div class="callout callout-good" style="margin-top: 2rem;">
+        <h3 style="margin-top: 0;">The Bottom Line</h3>
+        <p>Sveti Stefan / Przno is the answer. It&rsquo;s the rare spot that satisfies everyone in a mixed-age group: beautiful beaches the parents can walk to, excellent local restaurants, authentic fishing-village character, no cruise ships, no oligarch glitz, and the budget stretches 20&ndash;25% further than Croatia. Kor&ccedil;ula is the backup if the group wants a Croatian island with wine culture. Skip Kotor, Budva, Tivat, and Krk entirely in August.</p>
+    </div>
+
+</div>
+
+<footer>
+    Researched May 2026. Based on 2024&ndash;2026 travel reports, villa listings, cruise schedules, and traveller forums.<br>
+    Prices and availability should be verified at time of booking.
+</footer>
+
+</body>
+</html>
